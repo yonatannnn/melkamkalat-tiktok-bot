@@ -5,6 +5,7 @@ CLI (for previewing):
   python render.py --id q002    # render one quote
 """
 import argparse
+import zlib
 import json
 from pathlib import Path
 
@@ -54,6 +55,19 @@ def build_html(q: dict) -> str:
             highlight_size=fit(q["highlight"], 64, 10, 46),
             sub_size=40, cta_size=fit(q.get("cta", ""), 44, 18, 32),
             card_top=q.get("card_top", 905), author=q.get("author", ""),
+        )
+    elif q["template"] in ("dark", "poster", "split", "minimal"):
+        full = " ".join(filter(None, [q.get("line1"), q.get("highlight"), q.get("line2"),
+                                      q.get("sub"), q.get("cta")]))
+        n = len(full)
+        body_size = 66 if n <= 50 else 58 if n <= 90 else 50 if n <= 140 else 42
+        longest = max([q.get(k, "") for k in ("line1", "line2", "cta")] + (q.get("sub") or "").split("\n"), key=len)
+        ctx = dict(
+            brand=config.BRAND, image=image, author=q.get("author", ""),
+            line1=q.get("line1", ""), highlight=q["highlight"], line2=q.get("line2", ""),
+            sub=q.get("sub", ""), cta=q.get("cta", ""),
+            line_size=fit(longest, 58, 18, 40), highlight_size=fit(q["highlight"], 80, 10, 52),
+            body_size=body_size, theme=q.get("theme") or ("dark" if zlib.crc32(q["id"].encode()) % 2 else "paper"),
         )
     else:
         raise ValueError(f"unknown template {q['template']!r}")

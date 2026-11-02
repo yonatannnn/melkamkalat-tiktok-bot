@@ -26,6 +26,21 @@ ART_STYLE = (
     "The edges fade softly and gradually into plain parchment, with no hard outline, frame or torn-paper edge. "
     "Absolutely no text, letters, words, logos, watermarks, borders or frames."
 )
+# Picture style per layout, matching the different looks on the account
+STYLES = {
+    "hero": ART_STYLE,
+    "card": ART_STYLE,
+    "dark": ("Dark, moody, cinematic digital painting on a near-black background, deep shadows, glowing warm "
+             "highlights in gold and red, one strong symbolic subject (for example a chess king, a broken heart, "
+             "a candle, a moon, an hourglass, a lone figure). Rich detail, emotional, dramatic. "
+             "No text, letters, logos or watermarks."),
+    "poster": ("Epic dramatic painting that fills the whole frame, strong contrast, cinematic lighting, bold colors "
+               "such as deep red or golden light, powerful and emotional mood. Keep the lower half darker and calmer "
+               "because text will be placed there. No text, letters, logos or watermarks."),
+    "split": ("Classic black-and-white or softly tinted engraving / oil-painting style, like an illustration in an old "
+              "book, finely detailed, calm and thoughtful mood, plain light background. "
+              "No text, letters, logos, borders or watermarks."),
+}
 NO_REAL_PEOPLE = "Do not depict any real, famous or identifiable person; use fictional, anonymous people only."
 
 TEMPLATE_GUIDE = {
@@ -34,7 +49,12 @@ TEMPLATE_GUIDE = {
             "because text will be placed there.",
     "card": "A head-and-shoulders portrait sketch, centered, facing the viewer, "
             "on a plain parchment background with nothing behind them.",
+    "dark": "One central symbolic subject, centered in the frame, surrounded by darkness.",
+    "poster": "A full vertical scene with the main subject in the upper and middle part.",
+    "split": "A portrait or scene, subject centered, with a plain light background that fades out at the top.",
 }
+ASPECT = {"hero": "4:3", "card": "1:1", "dark": "1:1", "poster": "9:16", "split": "1:1"}
+PORTRAIT_LAYOUTS = ("card", "split")
 
 # Quotes may only be attributed to people who died before this year, so every portrait is historical.
 HISTORICAL_CUTOFF = 1950
@@ -46,7 +66,7 @@ QUOTE_SCHEMA = {
     "items": {
         "type": "object",
         "properties": {
-            "template": {"type": "string", "enum": ["hero", "card"]},
+            "template": {"type": "string", "enum": ["hero", "card", "dark", "poster", "split", "minimal"]},
             "line1": {"type": "string"},
             "highlight": {"type": "string"},
             "line2": {"type": "string"},
@@ -56,12 +76,12 @@ QUOTE_SCHEMA = {
             "author_en": {"type": "string", "description": "Author's name in English, e.g. Socrates"},
             "author_died": {"type": "integer", "description": "Year the author died"},
             "original": {"type": "string", "description": "The quote in its well-known English wording"},
-            "source": {"type": "string", "description": "Book/work it comes from, if known"},
+            "work": {"type": "string", "description": "Book/work it comes from, if known"},
             "caption": {"type": "string"},
             "image_prompt": {"type": "string"},
         },
         "required": ["template", "line1", "highlight", "author", "author_en", "author_died",
-                     "original", "caption", "image_prompt"],
+                     "original", "caption"],
     },
 }
 
@@ -88,23 +108,26 @@ IMPORTANT: every field (line1, highlight, line2, sub, cta) must be a piece of th
 Never add extra words, slogans or summaries that the author did not say. If a quote is short,
 leave sub and/or cta empty rather than inventing text.
 
-Each quote uses one of two layouts:
-- "hero": line1 (short opening clause), highlight (1-2 key words, shown huge in red), line2 (closing clause).
-  Leave sub and cta empty.
-- "card": line1 (opening), highlight (1-3 key words in gold), sub (the next part of the quote, 1-2 short lines,
-  use \\n between lines), cta (the last sentence of the quote, if it has one). Leave line2 empty.
-  Use "card" for longer quotes with 2-3 sentences.
-  The card layout shows a portrait of the author, so use it for authors whose appearance is well known
-  from classical busts or portrait paintings.
-Keep every line under ~22 characters if possible. Use both layouts.
+Each quote uses one of these layouts. Use a DIFFERENT layout for each quote and spread them evenly:
+- "hero": parchment, huge red key word. line1 (opening clause), highlight (1-2 key words), line2 (closing clause).
+- "card": parchment card with a portrait of the AUTHOR on top. line1, highlight (1-3 key words), sub (next part,
+  1-2 short lines, use \\n between lines), cta (last sentence of the quote, if any). For authors whose
+  appearance is well known from busts or paintings.
+- "dark": dark moody poster with a symbolic picture on top. line1, highlight, line2 (or sub/cta for longer quotes).
+- "poster": full-screen dramatic painting with the text over it. line1, highlight, line2. Best for strong,
+  short, powerful quotes (courage, power, war, discipline).
+- "split": light page, quote on top in quotation marks, picture of the AUTHOR (or a scene) below. Good for
+  longer, thoughtful quotes. line1, highlight, line2 / sub / cta.
+- "minimal": text only, no picture. line1, highlight, line2 / sub / cta. Good for short, sharp quotes.
+Keep every line under ~22 characters if possible.
 
 "author": the name in Amharic (e.g. ሶቅራጥስ, ማኪያቬሊ, ማርከስ ኦሬሊየስ). "author_en": the name in English.
-"original": the well-known English wording of the quote. "source": the work it is from, if known.
+"original": the well-known English wording of the quote. "work": the book or work it is from, if known.
 "caption": the full Amharic quote, then " — " and the Amharic author name, then: {config.DEFAULT_HASHTAGS}
 "image_prompt": in English, describe ONLY the subject, setting and mood (no art style or "photo" words).
-  For "card": a portrait of the author as he is traditionally depicted in classical busts or historical
-  paintings (mention age, beard, clothing of his era). For "hero": a scene that fits the quote,
-  with an anonymous figure, not the author.
+  For "card" and "split": a portrait of the author as he is traditionally depicted in classical busts or
+  historical paintings (mention age, beard, clothing of his era). For "hero" and "poster": a scene that fits the
+  quote, with an anonymous figure, not the author. For "dark": one symbolic object or figure. For "minimal": "".
 
 Style examples from the account:
 {json.dumps(ex, ensure_ascii=False, indent=1)}
@@ -130,9 +153,10 @@ Do NOT repeat any of these existing quotes:
         it = {k: (v.strip() if isinstance(v, str) else v) for k, v in it.items() if v not in (None, "")}
         if it["template"] == "hero":
             it.pop("sub", None), it.pop("cta", None)
-        else:
+        elif it["template"] == "card":
             it.pop("line2", None)
-            it["sub"] = it.get("sub", "").replace("\\n", "\n")
+        if it.get("sub"):
+            it["sub"] = it["sub"].replace("\\n", "\n")
         out.append(it)
     return out
 
@@ -141,19 +165,19 @@ def describe_scene(q: dict) -> str:
     """For quotes from his own list that have no image_prompt, invent one."""
     text = " ".join(filter(None, [q.get("line1"), q.get("highlight"), q.get("line2"),
                                   q.get("sub"), q.get("cta")]))
-    if q["template"] == "card" and q.get("author_en"):
+    if q["template"] in PORTRAIT_LAYOUTS and q.get("author_en"):
         ask = (f"In one English sentence, describe a head-and-shoulders portrait of {q['author_en']} as he is "
                "traditionally depicted in classical busts or historical paintings (age, hair, beard, clothing).")
     else:
         ask = ("In one English sentence, describe an illustration scene that captures the emotion of this "
-               f"Amharic quote. {TEMPLATE_GUIDE[q['template']]} Use an anonymous figure, never a real person.")
+               f"Amharic quote. {TEMPLATE_GUIDE.get(q['template'], '')} Use an anonymous figure, never a real person.")
     resp = client().models.generate_content(model=config.GEMINI_TEXT_MODEL, contents=f"{ask}\n\nQuote: {text}")
     return resp.text.strip()
 
 
 def is_historical_portrait(q: dict) -> bool:
     died = int(q.get("author_died") or 0)
-    return q["template"] == "card" and bool(q.get("author_en")) and died != 0 and died < HISTORICAL_CUTOFF
+    return q["template"] in PORTRAIT_LAYOUTS and bool(q.get("author_en")) and died != 0 and died < HISTORICAL_CUTOFF
 
 
 # ---------------------------------------------------------------- images
@@ -164,8 +188,9 @@ def generate_illustration(q: dict, out: Path) -> Path:
     historical = is_historical_portrait(q)
     people_rule = (f"This is a historical portrait of {q['author_en']} (died {q['author_died']}), "
                    "based on classical busts and old paintings." if historical else NO_REAL_PEOPLE)
-    prompt = f"{scene}\n\nComposition: {TEMPLATE_GUIDE[q['template']]}\n\nStyle: {ART_STYLE} {people_rule}"
-    aspect = "4:3" if q["template"] == "hero" else "1:1"
+    prompt = (f"{scene}\n\nComposition: {TEMPLATE_GUIDE[q['template']]}\n\n"
+              f"Style: {STYLES[q['template']]} {people_rule}")
+    aspect = ASPECT[q["template"]]
     def call(block_celebs: bool):
         img_cfg = types.ImageConfig(aspect_ratio=aspect)
         if block_celebs:

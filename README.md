@@ -8,8 +8,9 @@ When fewer than 3 quotes are left, Gemini writes 5 new ones and sends previews t
 
 ## Owner's daily use (Telegram)
 - **Add a quote:** send it to the bot with the key word in `*stars*`
-  - 3 lines → big red word style:  `ራስህን ማሻሻል ስትጀምር፣` / `*ብቸኝነት*` / `የምትከፍለው ዋጋ ነው።`
-  - 4+ lines → card style; the last line goes in the brown box
+  - 3 lines → short layouts (rotates: hero, dark, poster, minimal):  `ራስህን ማሻሻል ስትጀምር፣` / `*ብቸኝነት*` / `የምትከፍለው ዋጋ ነው።`
+  - 4+ lines → long layouts (rotates: card, split, dark, minimal)
+  - optional last line `— ሶቅራጥስ` adds the author
 - **Approve AI quotes:** tap ✅ or ❌ under each preview
 - **Daily post (Telegram mode):** at 18:00 the bot sends the finished image, a full-quality file and the caption.
   Save the file and post it on TikTok as a photo, then paste the caption.
@@ -20,7 +21,7 @@ The bot reads Telegram every 2 hours, so replies are not instant.
 ## Files
 | File | What it does |
 |---|---|
-| `render.py`, `templates/` | HTML → PNG renderer (hero + card styles) |
+| `render.py`, `templates/` | HTML → JPEG renderer, 6 layouts: hero, card, dark, poster, split, minimal |
 | `gemini_ai.py` | Gemini: new quotes + illustrations |
 | `telegram_bot.py` | previews, approvals, alerts, owner's quotes |
 | `tiktok.py`, `tiktok_auth.py` | TikTok Content Posting API + one-time login |

@@ -94,6 +94,17 @@ def parse_owner_quote(text: str) -> dict | None:
             "sub": "\n".join(rest[:-1]), "cta": rest[-1], **extra}
 
 
+# Owner quotes rotate through the account's different looks
+SHORT_LAYOUTS = ["hero", "dark", "poster", "minimal"]   # line1 / *highlight* / line2
+LONG_LAYOUTS = ["card", "split", "dark", "minimal"]     # longer quotes with extra lines
+
+
+def rotate_layout(base: str, quotes: list[dict]) -> str:
+    cycle = SHORT_LAYOUTS if base == "hero" else LONG_LAYOUTS
+    n = sum(1 for q in quotes if q.get("source") == "owner")
+    return cycle[n % len(cycle)]
+
+
 HELP = ("Send a quote with the key word in *stars*:\n\n"
         "ራስህን ማሻሻል ስትጀምር፣\n*ብቸኝነት*\nየምትከፍለው ዋጋ ነው።\n\n"
         "3 lines → big red word style. 4+ lines → card style (last line in the brown box).\n"
@@ -123,6 +134,7 @@ def sync(allow_ai: bool = True) -> None:
             tg.send_message("⚠️ I couldn't read that. Put the key word in *stars*.\n\n" + HELP)
             continue
         q.update(id=next_owner_id(quotes), source="owner")
+        q["template"] = rotate_layout(q["template"], quotes)
         quotes.append(q)
         tg.send_message(f"✅ Added {q['id']} ({q['template']} style). "
                         f"{len(unused(quotes))} quotes in the queue.")
@@ -160,11 +172,12 @@ def suggest_ai_quotes(quotes: list[dict], pending: list[dict]) -> None:
     for i, q in enumerate(new, 1):
         q["id"] = f"ai-{stamp}-{i}"
         q["caption"] = q.get("caption") or caption_for(q)
-        try:
-            illus = gemini_ai.generate_illustration(q, config.GENERATED_ILLUS / f"{q['id']}.png")
-            q["image"] = illus.relative_to(config.ILLUS).as_posix()
-        except Exception as e:
-            print(f"illustration failed for {q['id']}: {e}")
+        if q["template"] != "minimal":
+            try:
+                illus = gemini_ai.generate_illustration(q, config.GENERATED_ILLUS / f"{q['id']}.png")
+                q["image"] = illus.relative_to(config.ILLUS).as_posix()
+            except Exception as e:
+                print(f"illustration failed for {q['id']}: {e}")
         preview = render.render_one(q, PREVIEWS / f"{q['id']}.jpg")
         q["status"] = "waiting"
         q["preview"] = preview.relative_to(config.ROOT).as_posix()
@@ -172,7 +185,7 @@ def suggest_ai_quotes(quotes: list[dict], pending: list[dict]) -> None:
         save(config.PENDING_FILE, pending)
         check = ""
         if q.get("original"):
-            src = f", {q['source']}" if q.get("source") else ""
+            src = f", {q['work']}" if q.get("work") else ""
             check = f"\n\n🔎 Original: \"{q['original']}\"\n— {q.get('author_en', '')}{src}"
         tg.send_for_approval(q["id"], preview, q["caption"] + check)
 
@@ -189,7 +202,7 @@ def prepare(preview_only: bool = False) -> dict | None:
         return None
     q = queue[0]
 
-    if not render.illustration_path(q):
+    if q["template"] != "minimal" and not render.illustration_path(q):
         import gemini_ai
         try:
             illus = gemini_ai.generate_illustration(q, config.GENERATED_ILLUS / f"{q['id']}.png")
