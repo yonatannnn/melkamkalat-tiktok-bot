@@ -74,7 +74,8 @@ Each quote uses one of two layouts:
 Keep every line under ~22 characters if possible. Mix both layouts.
 
 "caption": the full quote as one Amharic sentence followed by: {config.DEFAULT_HASHTAGS}
-"image_prompt": in English, describe a scene that fits the quote's emotion.
+"image_prompt": in English, describe ONLY the subject, setting and mood of a scene that fits the quote's emotion
+  (no art style, camera, lighting or "photo" words — the style is added separately).
   For "hero" a scene with an anonymous figure; for "card" a portrait of a fictional anonymous person.
   Never a real or famous person.
 
