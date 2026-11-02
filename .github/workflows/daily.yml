@@ -1,0 +1,94 @@
+name: Daily TikTok quote
+
+on:
+  schedule:
+    - cron: "0 15 * * *"      # post: 18:00 Ethiopia time (UTC+3)
+    - cron: "30 */2 * * *"    # sync: read Telegram quotes/approvals every 2 hours
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "post or sync"
+        default: post
+        type: choice
+        options: [post, sync]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tiktok-bot
+  cancel-in-progress: false
+
+env:
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  GEMINI_TEXT_MODEL: ${{ vars.GEMINI_TEXT_MODEL }}
+  GEMINI_IMAGE_MODEL: ${{ vars.GEMINI_IMAGE_MODEL }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+  TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+  TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+  TIKTOK_POST_MODE: ${{ vars.TIKTOK_POST_MODE }}
+  TIKTOK_PRIVACY: ${{ vars.TIKTOK_PRIVACY }}
+  PUBLIC_BASE_URL: ${{ vars.PUBLIC_BASE_URL }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Pick task
+        id: task
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then t="${{ inputs.task }}";
+          elif [ "${{ github.event.schedule }}" = "0 15 * * *" ]; then t=post; else t=sync; fi
+          echo "task=$t" >> "$GITHUB_OUTPUT"
+
+      - name: Sync Telegram
+        if: steps.task.outputs.task == 'sync'
+        run: python daily.py sync
+
+      - name: Prepare today's image
+        if: steps.task.outputs.task == 'post'
+        run: python daily.py prepare
+
+      - name: Commit (publishes image to GitHub Pages)
+        run: |
+          git config user.name "quote-bot"
+          git config user.email "quote-bot@users.noreply.github.com"
+          git add -A quotes state docs assets/illustrations/generated
+          git diff --cached --quiet || git commit -m "bot: ${{ steps.task.outputs.task }} $(date -u +%F)"
+          git push
+
+      - name: Post to TikTok
+        if: steps.task.outputs.task == 'post'
+        run: python daily.py publish
+
+      - name: Save rotated TikTok refresh token
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          if [ -f state/.new_refresh_token ] && [ -n "$GH_TOKEN" ]; then
+            gh secret set TIKTOK_REFRESH_TOKEN < state/.new_refresh_token
+            rm state/.new_refresh_token
+          fi
+
+      - name: Commit history
+        if: always()
+        run: |
+          git add -A quotes state docs assets/illustrations/generated
+          git diff --cached --quiet || git commit -m "bot: posted $(date -u +%F)"
+          git push || true

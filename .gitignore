@@ -1,0 +1,8 @@
+.venv/
+.env
+output/
+__pycache__/
+state/.new_refresh_token
+templates/_render_*.html
+examples/
+assets/illustrations/test_*

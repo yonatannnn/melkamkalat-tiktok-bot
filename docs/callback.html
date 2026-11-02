@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TikTok Login</title>
+<style>
+  :root { --bg:#ecdfc8; --ink:#1f1813; --accent:#8e1b1b; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--ink);
+         font-family: system-ui, sans-serif; padding:16px; }
+  .box { max-width:560px; width:100%; text-align:center; }
+  code { display:block; word-break:break-all; background:#fff8ec; border:1px solid #c9b18c; padding:14px;
+         border-radius:10px; margin:16px 0; font-size:14px; }
+  button { background:var(--accent); color:#fff; border:0; padding:12px 22px; border-radius:10px; font-size:16px; }
+</style></head>
+<body><div class="box">
+  <h1>መልካም ቃላት</h1>
+  <p id="msg">Reading login result…</p>
+  <code id="code" hidden></code>
+  <button id="copy" hidden>Copy code</button>
+</div>
+<script>
+  const p = new URLSearchParams(location.search);
+  const code = p.get("code"), err = p.get("error");
+  const msg = document.getElementById("msg");
+  if (code) {
+    msg.textContent = "✅ Login approved. Send this code to the person setting up the automation:";
+    const el = document.getElementById("code"); el.textContent = code; el.hidden = false;
+    const b = document.getElementById("copy"); b.hidden = false;
+    b.onclick = () => navigator.clipboard.writeText(code).then(() => b.textContent = "Copied ✓");
+  } else {
+    msg.textContent = err ? "❌ Login failed: " + (p.get("error_description") || err) : "No login code found.";
+  }
+</script>
+</body></html>
