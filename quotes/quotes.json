@@ -5,7 +5,9 @@
     "line1": "ራስህን ማሻሻል ስትጀምር፣",
     "highlight": "ብቸኝነት",
     "line2": "የምትከፍለው ዋጋ ነው።",
-    "caption": "ራስህን ማሻሻል ስትጀምር ብቸኝነት የምትከፍለው ዋጋ ነው። #መልካምቃላት #ethiopia #amharic #motivation"
+    "caption": "ራስህን ማሻሻል ስትጀምር ብቸኝነት የምትከፍለው ዋጋ ነው። #መልካምቃላት #ethiopia #amharic #motivation",
+    "image_prompt": "Under a vast, mostly empty pale sky that occupies the entire top third of the frame, a lone traveler with a wooden walking stick climbs a steep, winding mountain path situated in the lower and middle sections, moving forward with quiet resolve while leaving the warm, distant lights of a crowded valley far behind.",
+    "image": "generated/q001.png"
   },
   {
     "id": "q002",
@@ -14,6 +16,8 @@
     "highlight": "ርቀት ነው።",
     "sub": "ምላሽ አትስጥ፣ አትከራከር፣\nወደ ድራማም አትግባ።",
     "cta": "በጸጥታ ራስህን አርቅ።",
-    "caption": "ለንቀት ብቸኛው መልስ ርቀት ነው። #መልካምቃላት #ethiopia #amharic #quotes"
+    "caption": "ለንቀት ብቸኛው መልስ ርቀት ነው። #መልካምቃላት #ethiopia #amharic #quotes",
+    "image_prompt": "Centered on a plain parchment background with nothing behind them, a head-and-shoulders portrait sketch depicts an anonymous fictional person gazing directly at the viewer with a serene, stoic expression that exudes quiet dignity and peaceful detachment.",
+    "image": "generated/q002.png"
   }
 ]
