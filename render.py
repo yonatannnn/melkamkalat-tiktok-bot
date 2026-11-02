@@ -82,7 +82,10 @@ def render_many(items: list[tuple[dict, Path]]) -> list[Path]:
                 page.goto(tmp.resolve().as_uri())
                 page.evaluate("document.fonts.ready")
                 page.wait_for_load_state("networkidle")
-                page.screenshot(path=str(out))
+                if out.suffix.lower() in (".jpg", ".jpeg"):  # TikTok photo posts accept only JPEG/WebP
+                    page.screenshot(path=str(out), type="jpeg", quality=92)
+                else:
+                    page.screenshot(path=str(out))
                 done.append(out)
             finally:
                 tmp.unlink(missing_ok=True)

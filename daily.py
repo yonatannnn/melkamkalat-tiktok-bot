@@ -157,7 +157,7 @@ def suggest_ai_quotes(quotes: list[dict], pending: list[dict]) -> None:
             q["image"] = illus.relative_to(config.ILLUS).as_posix()
         except Exception as e:
             print(f"illustration failed for {q['id']}: {e}")
-        preview = render.render_one(q, PREVIEWS / f"{q['id']}.png")
+        preview = render.render_one(q, PREVIEWS / f"{q['id']}.jpg")
         q["status"] = "waiting"
         q["preview"] = preview.relative_to(config.ROOT).as_posix()
         pending.append(q)
@@ -187,7 +187,7 @@ def prepare(preview_only: bool = False) -> dict | None:
             tg.send_message(f"⚠️ Gemini picture failed for {q['id']} ({e}). Posting text-only.")
 
     day = dt.datetime.now(EAT).strftime("%Y-%m-%d")
-    out = (config.OUTPUT if preview_only else config.PUBLIC_POSTS) / f"{day}_{q['id']}.png"
+    out = (config.OUTPUT if preview_only else config.PUBLIC_POSTS) / f"{day}_{q['id']}.jpg"
     render.render_one(q, out)
     print(f"prepared {q['id']} → {out}")
     if not preview_only:
