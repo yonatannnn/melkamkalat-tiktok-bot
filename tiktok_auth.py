@@ -11,7 +11,7 @@ import urllib.parse
 import config
 import tiktok
 
-SCOPES = "user.info.basic,video.publish,video.upload"
+SCOPES = "user.info.basic,video.upload"  # drafts only; add video.publish for DIRECT_POST
 
 
 def main():

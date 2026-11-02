@@ -35,11 +35,12 @@ The bot reads Telegram every 2 hours, so replies are not instant.
 3. **Telegram**: create a bot with @BotFather. The owner sends it `/start`. Get the chat id from
    `https://api.telegram.org/bot<TOKEN>/getUpdates`.
 4. **TikTok developer app** at https://developers.tiktok.com:
-   - add products **Login Kit** and **Content Posting API** (turn on Direct Post)
-   - scopes: `user.info.basic`, `video.publish`, `video.upload`
+   - add products **Login Kit** and **Content Posting API** (Direct Post only if TIKTOK_POST_MODE=DIRECT_POST)
+   - scopes: `user.info.basic`, `video.upload` (drafts mode; add `video.publish` for Direct Post)
    - redirect URI: `https://USER.github.io/REPO/callback.html`
    - verify URL prefix `https://USER.github.io/REPO/` (needed for photo posts)
-   - submit the app for review. **Until it's approved, posts can only be private (`SELF_ONLY`).**
+   - drafts mode (default here): posts go to his TikTok inbox and he publishes them himself.
+     In sandbox, add his account as a target user. Direct Post needs app review before posts can be public.
 5. **Owner login**: `python tiktok_auth.py` → owner opens the link → `python tiktok_auth.py <CODE>` → refresh token
 6. **GitHub Secrets**: `GEMINI_API_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `TIKTOK_CLIENT_KEY`,
    `TIKTOK_CLIENT_SECRET`, `TIKTOK_REFRESH_TOKEN`, `GH_PAT` (a fine-grained token with *Secrets: write* on this

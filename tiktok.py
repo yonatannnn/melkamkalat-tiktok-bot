@@ -87,12 +87,15 @@ def wait_until_public(url: str, timeout: int = 300) -> None:
 
 def post_photos(image_urls: list[str], title: str, description: str) -> dict:
     token = access_token()
-    info = creator_info(token)
-    privacy = config.TIKTOK_PRIVACY
-    options = info.get("privacy_level_options") or []
-    if options and privacy not in options:
-        # e.g. unaudited app → only SELF_ONLY is allowed
-        privacy = "SELF_ONLY" if "SELF_ONLY" in options else options[0]
+    direct = config.TIKTOK_POST_MODE == "DIRECT_POST"
+    info, privacy = {}, "owner chooses in TikTok"
+    if direct:  # creator_info needs the video.publish scope, which drafts mode doesn't request
+        info = creator_info(token)
+        privacy = config.TIKTOK_PRIVACY
+        options = info.get("privacy_level_options") or []
+        if options and privacy not in options:
+            # e.g. unaudited app → only SELF_ONLY is allowed
+            privacy = "SELF_ONLY" if "SELF_ONLY" in options else options[0]
 
     body = {
         "media_type": "PHOTO",
@@ -108,7 +111,7 @@ def post_photos(image_urls: list[str], title: str, description: str) -> dict:
             "photo_images": image_urls,
         },
     }
-    if config.TIKTOK_POST_MODE == "DIRECT_POST":
+    if direct:
         body["post_info"].update({
             "privacy_level": privacy,
             "disable_comment": bool(info.get("comment_disabled", False)),
