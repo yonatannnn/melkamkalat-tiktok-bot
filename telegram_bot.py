@@ -42,6 +42,16 @@ def send_photo(path: Path, caption: str = "", buttons: list[list[dict]] | None =
         _call("sendPhoto", data=data, files={"photo": f})
 
 
+def send_document(path: Path, caption: str = "") -> None:
+    """Send as a file so Telegram doesn't compress it."""
+    if not enabled():
+        print(f"[telegram disabled] document {path}: {caption}")
+        return
+    with open(path, "rb") as f:
+        _call("sendDocument", data={"chat_id": config.TELEGRAM_CHAT_ID, "caption": caption[:1000]},
+              files={"document": (path.name, f, "image/jpeg")})
+
+
 def send_for_approval(qid: str, path: Path, caption: str) -> None:
     send_photo(
         path,

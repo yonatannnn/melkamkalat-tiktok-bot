@@ -58,7 +58,8 @@ TIKTOK_CLIENT_KEY = get("TIKTOK_CLIENT_KEY")
 TIKTOK_CLIENT_SECRET = get("TIKTOK_CLIENT_SECRET")
 TIKTOK_REFRESH_TOKEN = get("TIKTOK_REFRESH_TOKEN")
 TIKTOK_REDIRECT_URI = get("TIKTOK_REDIRECT_URI")
-# DIRECT_POST publishes immediately; MEDIA_UPLOAD sends to his TikTok inbox/drafts
+# DIRECT_POST publishes immediately; MEDIA_UPLOAD sends to his TikTok inbox/drafts;
+# TELEGRAM sends the finished image + caption to the owner on Telegram to post by hand
 TIKTOK_POST_MODE = get("TIKTOK_POST_MODE", "DIRECT_POST")
 # Unaudited TikTok apps may only use SELF_ONLY. Switch to PUBLIC_TO_EVERYONE after audit.
 TIKTOK_PRIVACY = get("TIKTOK_PRIVACY", "SELF_ONLY")

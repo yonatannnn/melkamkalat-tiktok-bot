@@ -11,6 +11,8 @@ When fewer than 3 quotes are left, Gemini writes 5 new ones and sends previews t
   - 3 lines → big red word style:  `ራስህን ማሻሻል ስትጀምር፣` / `*ብቸኝነት*` / `የምትከፍለው ዋጋ ነው።`
   - 4+ lines → card style; the last line goes in the brown box
 - **Approve AI quotes:** tap ✅ or ❌ under each preview
+- **Daily post (Telegram mode):** at 18:00 the bot sends the finished image, a full-quality file and the caption.
+  Save the file and post it on TikTok as a photo, then paste the caption.
 - `/queue` shows how many quotes are waiting
 
 The bot reads Telegram every 2 hours, so replies are not instant.
@@ -46,7 +48,7 @@ The bot reads Telegram every 2 hours, so replies are not instant.
    `TIKTOK_CLIENT_SECRET`, `TIKTOK_REFRESH_TOKEN`, `GH_PAT` (a fine-grained token with *Secrets: write* on this
    repo, so the bot can save renewed TikTok tokens).
    **Variables**: `PUBLIC_BASE_URL`, `TIKTOK_PRIVACY` (`SELF_ONLY` → `PUBLIC_TO_EVERYONE` after review),
-   optional `TIKTOK_POST_MODE` (`MEDIA_UPLOAD` = send to his drafts instead), `GEMINI_TEXT_MODEL`, `GEMINI_IMAGE_MODEL`.
+   `TIKTOK_POST_MODE`: `TELEGRAM` (owner posts by hand, no TikTok app needed), `MEDIA_UPLOAD` (TikTok drafts, needs a TikTok-approved app; sandbox uploads were accepted but never reached the phone), or `DIRECT_POST`, `GEMINI_TEXT_MODEL`, `GEMINI_IMAGE_MODEL`.
 7. Actions → "Daily TikTok quote" → Run workflow (`post`) to test.
 
 ## Local testing

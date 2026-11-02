@@ -207,11 +207,23 @@ def publish() -> None:
         print(f"{today['id']} already posted")
         return
 
-    url = tiktok.public_url_for(config.ROOT / today["image"])
+    image = config.ROOT / today["image"]
+    history = load(config.HISTORY_FILE, [])
+
+    if config.TIKTOK_POST_MODE == "TELEGRAM":
+        # Manual posting: owner gets the full-quality image + caption and posts it himself.
+        tg.send_photo(image, caption=f"📅 Today's quote ({today['id']}). Post it on TikTok:\n\n{today['caption']}")
+        tg.send_document(image, caption="⬆️ Full-quality file. Save it, then upload on TikTok as a photo.")
+        tg.send_message(today["caption"])  # separate message so the caption is easy to copy
+        history.append({"id": today["id"], "date": today["date"], "status": "SENT_TO_TELEGRAM"})
+        save(config.HISTORY_FILE, history)
+        TODAY_FILE.unlink(missing_ok=True)
+        return
+
+    url = tiktok.public_url_for(image)
     tiktok.wait_until_public(url)
     result = tiktok.post_photos([url], title=today["title"], description=today["caption"])
 
-    history = load(config.HISTORY_FILE, [])
     history.append({"id": today["id"], "date": today["date"], "url": url, **result})
     save(config.HISTORY_FILE, history)
     TODAY_FILE.unlink(missing_ok=True)
