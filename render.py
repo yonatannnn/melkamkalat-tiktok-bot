@@ -43,6 +43,7 @@ def build_html(q: dict) -> str:
             line_size=fit(max(q.get("line1", ""), q.get("line2", ""), key=len), 68, 16, 50),
             highlight_size=fit(q["highlight"], 118, 7, 72),
             text_top=q.get("text_top", 720), illus_height=q.get("illus_height", 880),
+            author=q.get("author", ""),
         )
     elif q["template"] == "card":
         ctx = dict(
@@ -52,7 +53,7 @@ def build_html(q: dict) -> str:
             line_size=fit(q.get("line1", ""), 54, 16, 40),
             highlight_size=fit(q["highlight"], 64, 10, 46),
             sub_size=40, cta_size=fit(q.get("cta", ""), 44, 18, 32),
-            card_top=q.get("card_top", 905),
+            card_top=q.get("card_top", 905), author=q.get("author", ""),
         )
     else:
         raise ValueError(f"unknown template {q['template']!r}")

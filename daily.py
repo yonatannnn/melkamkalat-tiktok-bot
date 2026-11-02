@@ -50,7 +50,10 @@ def quote_text(q: dict) -> str:
 
 
 def caption_for(q: dict) -> str:
-    return q.get("caption") or f"{quote_text(q)}\n\n{config.DEFAULT_HASHTAGS}"
+    if q.get("caption"):
+        return q["caption"]
+    by = f" — {q['author']}" if q.get("author") else ""
+    return f"{quote_text(q)}{by}\n\n{config.DEFAULT_HASHTAGS}"
 
 
 def next_owner_id(quotes: list[dict]) -> str:
@@ -68,6 +71,9 @@ def parse_owner_quote(text: str) -> dict | None:
     A highlight may also be inline:  "ለንቀት ብቸኛው መልስ *ርቀት ነው።*"
     """
     lines = [l.strip() for l in text.strip().splitlines() if l.strip()]
+    author = ""
+    if lines and lines[-1][:1] in ("—", "-", "–"):
+        author = lines.pop().lstrip("—–- ").strip()
     idx = next((i for i, l in enumerate(lines) if "*" in l), None)
     if idx is None:
         return None
@@ -80,16 +86,18 @@ def parse_owner_quote(text: str) -> dict | None:
     after_inline = hl_line[m.end():].strip()
     line1 = " ".join(filter(None, lines[:idx] + [before_inline]))
     rest = ([after_inline] if after_inline else []) + lines[idx + 1:]
+    extra = {"author": author} if author else {}
     if len(rest) <= 1:
         return {"template": "hero", "line1": line1, "highlight": highlight,
-                "line2": rest[0] if rest else ""}
+                "line2": rest[0] if rest else "", **extra}
     return {"template": "card", "line1": line1, "highlight": highlight,
-            "sub": "\n".join(rest[:-1]), "cta": rest[-1]}
+            "sub": "\n".join(rest[:-1]), "cta": rest[-1], **extra}
 
 
 HELP = ("Send a quote with the key word in *stars*:\n\n"
         "ራስህን ማሻሻል ስትጀምር፣\n*ብቸኝነት*\nየምትከፍለው ዋጋ ነው።\n\n"
         "3 lines → big red word style. 4+ lines → card style (last line in the brown box).\n"
+        "Optional last line: — Author (e.g. — ሶቅራጥስ)\n"
         "/queue — how many quotes are waiting")
 
 
@@ -162,7 +170,11 @@ def suggest_ai_quotes(quotes: list[dict], pending: list[dict]) -> None:
         q["preview"] = preview.relative_to(config.ROOT).as_posix()
         pending.append(q)
         save(config.PENDING_FILE, pending)
-        tg.send_for_approval(q["id"], preview, q["caption"])
+        check = ""
+        if q.get("original"):
+            src = f", {q['source']}" if q.get("source") else ""
+            check = f"\n\n🔎 Original: \"{q['original']}\"\n— {q.get('author_en', '')}{src}"
+        tg.send_for_approval(q["id"], preview, q["caption"] + check)
 
 
 # ------------------------------------------------------------------ prepare / publish
