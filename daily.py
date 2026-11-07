@@ -235,16 +235,24 @@ def prepare(preview_only: bool = False) -> list[dict]:
     """Pick the next POSTS_PER_DAY quotes, draw missing pictures and render them."""
     sync(allow_ai=not preview_only)
     quotes = load(config.QUOTES_FILE, [])
-    queue = unused(quotes)[:config.POSTS_PER_DAY]
-    if not queue:
-        tg.send_message("⚠️ No approved quotes left, so nothing was posted today. "
-                        "Send me a quote or approve an AI suggestion.")
+    day = dt.datetime.now(EAT).strftime("%Y-%m-%d")
+    # Backup runs later in the day only make up what the morning run missed.
+    done_today = 0 if preview_only else sum(1 for h in load(config.HISTORY_FILE, []) if h.get("date") == day)
+    want = config.POSTS_PER_DAY - done_today
+    if want <= 0:
+        print(f"already posted {done_today} today")
+        TODAY_FILE.unlink(missing_ok=True)
         return []
-    if len(queue) < config.POSTS_PER_DAY and not preview_only:
+    queue = unused(quotes)[:want]
+    if not queue:
+        if done_today == 0:
+            tg.send_message("⚠️ No approved quotes left, so nothing was posted today. "
+                            "Send me a quote or approve an AI suggestion.")
+        return []
+    if len(queue) < want and done_today == 0 and not preview_only:
         tg.send_message(f"⚠️ Only {len(queue)} approved quote(s) left, so today has {len(queue)} "
                         f"post(s) instead of {config.POSTS_PER_DAY}. Approve more AI suggestions or send quotes.")
 
-    day = dt.datetime.now(EAT).strftime("%Y-%m-%d")
     items = []
     for q in queue:
         if q["template"] != "minimal" and not render.illustration_path(q):
