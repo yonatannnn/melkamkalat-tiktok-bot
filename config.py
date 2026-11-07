@@ -20,7 +20,7 @@ _load_dotenv()
 
 
 def get(name: str, default: str | None = None, required: bool = False) -> str:
-    val = os.environ.get(name, default)
+    val = os.environ.get(name) or default
     if required and not val:
         raise SystemExit(f"Missing required setting {name} (set it in .env or GitHub secrets)")
     return val or ""
@@ -46,8 +46,10 @@ GEMINI_TEXT_MODEL = get("GEMINI_TEXT_MODEL", "gemini-3.5-flash")
 GEMINI_IMAGE_MODEL = get("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
 
 # How many approved quotes to keep in reserve before asking Gemini for more
-LOW_QUOTES_THRESHOLD = int(get("LOW_QUOTES_THRESHOLD", "3"))
-AI_BATCH_SIZE = int(get("AI_BATCH_SIZE", "5"))
+LOW_QUOTES_THRESHOLD = int(get("LOW_QUOTES_THRESHOLD", "12"))
+AI_BATCH_SIZE = int(get("AI_BATCH_SIZE", "10"))
+# How many separate posts the daily run makes
+POSTS_PER_DAY = int(get("POSTS_PER_DAY", "4"))
 
 # Telegram (owner gets previews, approvals and alerts here)
 TELEGRAM_BOT_TOKEN = get("TELEGRAM_BOT_TOKEN")

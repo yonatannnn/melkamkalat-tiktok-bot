@@ -1,9 +1,9 @@
 # መልካም ቃላት — daily TikTok quote bot
 
-Every day at **18:00 Ethiopia time**: next quote from the owner's list → Gemini draws an illustration →
+Every day at **09:00 Ethiopia time**: the next 4 quotes from the owner's list (`POSTS_PER_DAY`) → Gemini draws an illustration →
 rendered as a 1080×1920 image in the account's style → posted to TikTok → result sent to the owner on Telegram.
 
-When fewer than 3 quotes are left, Gemini writes 5 new ones and sends previews to Telegram with
+When fewer than 12 quotes are left, Gemini writes 10 new ones and sends previews to Telegram with
 ✅ Approve / ❌ Reject buttons. Only approved quotes are ever posted.
 
 ## Owner's daily use (Telegram)
@@ -12,7 +12,7 @@ When fewer than 3 quotes are left, Gemini writes 5 new ones and sends previews t
   - 4+ lines → long layouts (rotates: card, split, dark, minimal)
   - optional last line `— ሶቅራጥስ` adds the author
 - **Approve AI quotes:** tap ✅ or ❌ under each preview
-- **Daily post (Telegram mode):** at 18:00 the bot sends the finished image, a full-quality file and the caption.
+- **Daily posts (Telegram mode):** at 09:00 the bot sends 4 posts, each with the finished image, a full-quality file and the caption.
   Save the file and post it on TikTok as a photo, then paste the caption.
 - `/queue` shows how many quotes are waiting
 

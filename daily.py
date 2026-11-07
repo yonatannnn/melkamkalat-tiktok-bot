@@ -1,8 +1,8 @@
 """Daily pipeline.
 
   python daily.py sync       # read Telegram (new quotes, approvals), top up AI suggestions if the list is low
-  python daily.py prepare    # sync + pick today's quote + Gemini illustration + render into docs/posts/
-  python daily.py publish    # post the prepared image to TikTok and record it
+  python daily.py prepare    # sync + pick today's quotes (POSTS_PER_DAY) + Gemini illustration + render into docs/posts/
+  python daily.py publish    # post the prepared images to TikTok and record it
   python daily.py preview    # local test: prepare without touching history or TikTok
 
 In CI the order is: prepare → git push (so GitHub Pages serves the image) → publish → git push.
@@ -192,70 +192,90 @@ def suggest_ai_quotes(quotes: list[dict], pending: list[dict]) -> None:
 
 # ------------------------------------------------------------------ prepare / publish
 
-def prepare(preview_only: bool = False) -> dict | None:
+def prepare(preview_only: bool = False) -> list[dict]:
+    """Pick the next POSTS_PER_DAY quotes, draw missing pictures and render them."""
     sync(allow_ai=not preview_only)
     quotes = load(config.QUOTES_FILE, [])
-    queue = unused(quotes)
+    queue = unused(quotes)[:config.POSTS_PER_DAY]
     if not queue:
         tg.send_message("⚠️ No approved quotes left, so nothing was posted today. "
                         "Send me a quote or approve an AI suggestion.")
-        return None
-    q = queue[0]
-
-    if q["template"] != "minimal" and not render.illustration_path(q):
-        import gemini_ai
-        try:
-            illus = gemini_ai.generate_illustration(q, config.GENERATED_ILLUS / f"{q['id']}.png")
-            q["image"] = illus.relative_to(config.ILLUS).as_posix()
-            save(config.QUOTES_FILE, quotes)  # keeps image + image_prompt for reuse
-        except Exception as e:
-            tg.send_message(f"⚠️ Gemini picture failed for {q['id']} ({e}). Posting text-only.")
+        return []
+    if len(queue) < config.POSTS_PER_DAY and not preview_only:
+        tg.send_message(f"⚠️ Only {len(queue)} approved quote(s) left, so today has {len(queue)} "
+                        f"post(s) instead of {config.POSTS_PER_DAY}. Approve more AI suggestions or send quotes.")
 
     day = dt.datetime.now(EAT).strftime("%Y-%m-%d")
-    out = (config.OUTPUT if preview_only else config.PUBLIC_POSTS) / f"{day}_{q['id']}.jpg"
-    render.render_one(q, out)
-    print(f"prepared {q['id']} → {out}")
+    items = []
+    for q in queue:
+        if q["template"] != "minimal" and not render.illustration_path(q):
+            import gemini_ai
+            try:
+                illus = gemini_ai.generate_illustration(q, config.GENERATED_ILLUS / f"{q['id']}.png")
+                q["image"] = illus.relative_to(config.ILLUS).as_posix()
+                save(config.QUOTES_FILE, quotes)  # keeps image + image_prompt for reuse
+            except Exception as e:
+                tg.send_message(f"⚠️ Gemini picture failed for {q['id']} ({e}). Posting text-only.")
+
+        out = (config.OUTPUT if preview_only else config.PUBLIC_POSTS) / f"{day}_{q['id']}.jpg"
+        render.render_one(q, out)
+        print(f"prepared {q['id']} → {out}")
+        items.append({"id": q["id"], "date": day, "image": out.relative_to(config.ROOT).as_posix(),
+                      "caption": caption_for(q), "title": q.get("highlight", "")})
     if not preview_only:
-        save(TODAY_FILE, {"id": q["id"], "date": day, "image": out.relative_to(config.ROOT).as_posix(),
-                          "caption": caption_for(q), "title": q.get("highlight", "")})
-    return q
+        save(TODAY_FILE, items)
+    return queue
 
 
 def publish() -> None:
     import tiktok
 
-    today = load(TODAY_FILE, None)
-    if not today:
+    items = load(TODAY_FILE, None)
+    if not items:
         print("nothing prepared today")
         return
-    if today["id"] in used_ids():
-        print(f"{today['id']} already posted")
-        return
+    if isinstance(items, dict):  # older single-post format
+        items = [items]
 
-    image = config.ROOT / today["image"]
-    history = load(config.HISTORY_FILE, [])
+    done = used_ids()
+    failed = []
+    for n, today in enumerate(items, 1):
+        if today["id"] in done:
+            print(f"{today['id']} already posted")
+            continue
+        image = config.ROOT / today["image"]
+        history = load(config.HISTORY_FILE, [])
+        label = f"{n}/{len(items)} ({today['id']})"
 
-    if config.TIKTOK_POST_MODE == "TELEGRAM":
-        # Manual posting: owner gets the full-quality image + caption and posts it himself.
-        tg.send_photo(image, caption=f"📅 Today's quote ({today['id']}). Post it on TikTok:\n\n{today['caption']}")
-        tg.send_document(image, caption="⬆️ Full-quality file. Save it, then upload on TikTok as a photo.")
-        tg.send_message(today["caption"])  # separate message so the caption is easy to copy
-        history.append({"id": today["id"], "date": today["date"], "status": "SENT_TO_TELEGRAM"})
+        if config.TIKTOK_POST_MODE == "TELEGRAM":
+            # Manual posting: owner gets the full-quality image + caption and posts it himself.
+            tg.send_photo(image, caption=f"📅 Today's quote {label}. Post it on TikTok:\n\n{today['caption']}")
+            tg.send_document(image, caption="⬆️ Full-quality file. Save it, then upload on TikTok as a photo.")
+            tg.send_message(today["caption"])  # separate message so the caption is easy to copy
+            history.append({"id": today["id"], "date": today["date"], "status": "SENT_TO_TELEGRAM"})
+            save(config.HISTORY_FILE, history)
+            continue
+
+        try:
+            url = tiktok.public_url_for(image)
+            tiktok.wait_until_public(url, timeout=900)  # GitHub Pages can take a few minutes
+            result = tiktok.post_photos([url], title=today["title"], description=today["caption"])
+        except Exception as e:
+            traceback.print_exc()
+            failed.append(today)
+            tg.send_message(f"❌ Quote {label} could not be sent to TikTok: {e}")
+            continue
+
+        history.append({"id": today["id"], "date": today["date"], "url": url, **result})
         save(config.HISTORY_FILE, history)
-        TODAY_FILE.unlink(missing_ok=True)
-        return
+        where = {"SEND_TO_USER_INBOX": "sent to your TikTok inbox — open TikTok to post it",
+                 "PUBLISH_COMPLETE": f"posted ({result['privacy']})"}.get(result.get("status"), result.get("status"))
+        tg.send_photo(image, caption=f"📤 Quote {label}: {where}")
 
-    url = tiktok.public_url_for(image)
-    tiktok.wait_until_public(url)
-    result = tiktok.post_photos([url], title=today["title"], description=today["caption"])
-
-    history.append({"id": today["id"], "date": today["date"], "url": url, **result})
-    save(config.HISTORY_FILE, history)
+    if failed:
+        save(TODAY_FILE, failed)  # kept so a manual re-run of publish can retry them
+        raise RuntimeError(f"{len(failed)} of {len(items)} posts failed")
     TODAY_FILE.unlink(missing_ok=True)
-
-    where = {"SEND_TO_USER_INBOX": "sent to your TikTok inbox — open TikTok to post it",
-             "PUBLISH_COMPLETE": f"posted ({result['privacy']})"}.get(result.get("status"), result.get("status"))
-    tg.send_photo(config.ROOT / today["image"], caption=f"📤 Today's quote {today['id']}: {where}")
 
 
 # ------------------------------------------------------------------ main

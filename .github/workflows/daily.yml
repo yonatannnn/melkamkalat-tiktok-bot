@@ -2,7 +2,7 @@ name: Daily TikTok quote
 
 on:
   schedule:
-    - cron: "0 15 * * *"      # post: 18:00 Ethiopia time (UTC+3)
+    - cron: "0 6 * * *"       # post: 09:00 Ethiopia time (UTC+3), POSTS_PER_DAY posts
     - cron: "30 */2 * * *"    # sync: read Telegram quotes/approvals every 2 hours
   workflow_dispatch:
     inputs:
@@ -31,6 +31,7 @@ env:
   TIKTOK_POST_MODE: ${{ vars.TIKTOK_POST_MODE }}
   TIKTOK_PRIVACY: ${{ vars.TIKTOK_PRIVACY }}
   PUBLIC_BASE_URL: ${{ vars.PUBLIC_BASE_URL }}
+  POSTS_PER_DAY: ${{ vars.POSTS_PER_DAY }}
 
 jobs:
   run:
@@ -53,7 +54,7 @@ jobs:
         id: task
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then t="${{ inputs.task }}";
-          elif [ "${{ github.event.schedule }}" = "0 15 * * *" ]; then t=post; else t=sync; fi
+          elif [ "${{ github.event.schedule }}" = "0 6 * * *" ]; then t=post; else t=sync; fi
           echo "task=$t" >> "$GITHUB_OUTPUT"
 
       - name: Sync Telegram
