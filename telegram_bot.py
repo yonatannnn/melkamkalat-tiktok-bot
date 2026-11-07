@@ -52,10 +52,10 @@ def send_document(path: Path, caption: str = "") -> None:
               files={"document": (path.name, f, "image/jpeg")})
 
 
-def send_for_approval(qid: str, path: Path, caption: str) -> None:
+def send_for_approval(qid: str, path: Path, caption: str, title: str = "🆕 AI suggestion") -> None:
     send_photo(
         path,
-        caption=f"🆕 AI suggestion {qid}\n\n{caption}\n\nPost this quote?",
+        caption=f"{title} {qid}\n\n{caption}\n\nPost this quote?",
         buttons=[[{"text": "✅ Approve", "callback_data": f"approve:{qid}"},
                   {"text": "❌ Reject", "callback_data": f"reject:{qid}"}]],
     )

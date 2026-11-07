@@ -11,6 +11,8 @@ When fewer than 12 quotes are left, Gemini writes 10 new ones and sends previews
   - 3 lines → short layouts (rotates: hero, dark, poster, minimal):  `ራስህን ማሻሻል ስትጀምር፣` / `*ብቸኝነት*` / `የምትከፍለው ዋጋ ነው።`
   - 4+ lines → long layouts (rotates: card, split, dark, minimal)
   - optional last line `— ሶቅራጥስ` adds the author
+- **Send a quote in English:** e.g. `The unexamined life is not worth living — Socrates`. Gemini translates it,
+  picks the layout and picture, and sends a preview with ✅ / ❌. Only named authors are credited.
 - **Approve AI quotes:** tap ✅ or ❌ under each preview
 - **Daily posts (Telegram mode):** at 09:00 the bot sends 4 posts, each with the finished image, a full-quality file and the caption.
   Save the file and post it on TikTok as a photo, then paste the caption.

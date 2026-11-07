@@ -108,7 +108,9 @@ def rotate_layout(base: str, quotes: list[dict]) -> str:
 HELP = ("Send a quote with the key word in *stars*:\n\n"
         "ራስህን ማሻሻል ስትጀምር፣\n*ብቸኝነት*\nየምትከፍለው ዋጋ ነው።\n\n"
         "3 lines → big red word style. 4+ lines → card style (last line in the brown box).\n"
-        "Optional last line: — Author (e.g. — ሶቅራጥስ)\n"
+        "Optional last line: — Author (e.g. — ሶቅራጥስ)\n\n"
+        "Or send a quote in English (e.g. The unexamined life is not worth living — Socrates). "
+        "I'll translate it and send you a preview to approve.\n"
         "/queue — how many quotes are waiting")
 
 
@@ -120,6 +122,7 @@ def sync(allow_ai: bool = True) -> None:
     pending = load(config.PENDING_FILE, [])
 
     decisions, texts, state["telegram_offset"] = tg.fetch_updates(state.get("telegram_offset", 0))
+    to_translate = []
 
     for text in texts:
         if text.strip().lower() in ("/start", "/help"):
@@ -130,6 +133,9 @@ def sync(allow_ai: bool = True) -> None:
                             f"{sum(p['status'] == 'waiting' for p in pending)} AI suggestions to review.")
             continue
         q = parse_owner_quote(text)
+        if not q and needs_translation(text):
+            to_translate.append(text)
+            continue
         if not q:
             tg.send_message("⚠️ I couldn't read that. Put the key word in *stars*.\n\n" + HELP)
             continue
@@ -147,7 +153,7 @@ def sync(allow_ai: bool = True) -> None:
         if action == "approve":
             p["status"] = "approved"
             q = {k: v for k, v in p.items() if k not in ("status", "preview")}
-            q["source"] = "ai"
+            q.setdefault("source", "ai")
             quotes.append(q)
         else:
             p["status"] = "rejected"
@@ -156,9 +162,58 @@ def sync(allow_ai: bool = True) -> None:
     save(config.PENDING_FILE, pending)
     save(config.STATE_FILE, state)
 
-    waiting = [p for p in pending if p["status"] == "waiting"]
+    if to_translate:
+        translate_owner_quotes(to_translate, pending)
+
+    waiting = [p for p in pending if p["status"] == "waiting" and p["id"].startswith("ai-")]
     if allow_ai and len(unused(quotes)) < config.LOW_QUOTES_THRESHOLD and not waiting:
         suggest_ai_quotes(quotes, pending)
+
+
+def needs_translation(text: str) -> bool:
+    """A message with letters but no Ge'ez script (e.g. English) is a quote to translate."""
+    has_geez = any("\u1200" <= ch <= "\u137f" for ch in text)
+    has_letters = sum(ch.isalpha() for ch in text) >= 8
+    return has_letters and not has_geez and not text.strip().startswith("/")
+
+
+def add_suggestion(q: dict, pending: list[dict], title: str) -> None:
+    """Draw, render and send one quote to the owner with Approve / Reject buttons."""
+    import gemini_ai
+
+    q["caption"] = q.get("caption") or caption_for(q)
+    if q["template"] != "minimal":
+        try:
+            illus = gemini_ai.generate_illustration(q, config.GENERATED_ILLUS / f"{q['id']}.png")
+            q["image"] = illus.relative_to(config.ILLUS).as_posix()
+        except Exception as e:
+            print(f"illustration failed for {q['id']}: {e}")
+    preview = render.render_one(q, PREVIEWS / f"{q['id']}.jpg")
+    q["status"] = "waiting"
+    q["preview"] = preview.relative_to(config.ROOT).as_posix()
+    pending.append(q)
+    save(config.PENDING_FILE, pending)
+    check = ""
+    if q.get("original"):
+        who = q.get("author_en", "")
+        src = f", {q['work']}" if q.get("work") else ""
+        check = f"\n\n🔎 Original: \"{q['original']}\"" + (f"\n— {who}{src}" if who else "")
+    tg.send_for_approval(q["id"], preview, q["caption"] + check, title=title)
+
+
+def translate_owner_quotes(texts: list[str], pending: list[dict]) -> None:
+    import gemini_ai
+
+    stamp = dt.datetime.now(EAT).strftime("%Y%m%d%H%M")
+    for i, text in enumerate(texts, 1):
+        try:
+            q = gemini_ai.translate_quote(text)
+        except Exception as e:
+            tg.send_message(f"⚠️ I couldn't translate this quote ({e}). Please send it again later:\n\n{text[:500]}")
+            continue
+        q["id"] = f"tr-{stamp}-{i}"
+        q["source"] = "owner"
+        add_suggestion(q, pending, title="🌍 Your quote, translated")
 
 
 def suggest_ai_quotes(quotes: list[dict], pending: list[dict]) -> None:
@@ -171,23 +226,7 @@ def suggest_ai_quotes(quotes: list[dict], pending: list[dict]) -> None:
     stamp = dt.datetime.now(EAT).strftime("%Y%m%d%H%M")
     for i, q in enumerate(new, 1):
         q["id"] = f"ai-{stamp}-{i}"
-        q["caption"] = q.get("caption") or caption_for(q)
-        if q["template"] != "minimal":
-            try:
-                illus = gemini_ai.generate_illustration(q, config.GENERATED_ILLUS / f"{q['id']}.png")
-                q["image"] = illus.relative_to(config.ILLUS).as_posix()
-            except Exception as e:
-                print(f"illustration failed for {q['id']}: {e}")
-        preview = render.render_one(q, PREVIEWS / f"{q['id']}.jpg")
-        q["status"] = "waiting"
-        q["preview"] = preview.relative_to(config.ROOT).as_posix()
-        pending.append(q)
-        save(config.PENDING_FILE, pending)
-        check = ""
-        if q.get("original"):
-            src = f", {q['work']}" if q.get("work") else ""
-            check = f"\n\n🔎 Original: \"{q['original']}\"\n— {q.get('author_en', '')}{src}"
-        tg.send_for_approval(q["id"], preview, q["caption"] + check)
+        add_suggestion(q, pending, title="🆕 AI suggestion")
 
 
 # ------------------------------------------------------------------ prepare / publish

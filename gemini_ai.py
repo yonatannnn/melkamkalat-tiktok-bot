@@ -1,5 +1,6 @@
 """Gemini: write new Amharic quotes in the account's style, and draw the illustrations."""
 import json
+import re
 from pathlib import Path
 
 from google import genai
@@ -159,6 +160,73 @@ Do NOT repeat any of these existing quotes:
             it["sub"] = it["sub"].replace("\\n", "\n")
         out.append(it)
     return out
+
+
+def translate_quote(text: str) -> dict:
+    """Owner sent a quote in English (or another language): translate it into one quote in the account's style."""
+    schema = {**QUOTE_SCHEMA["items"]}
+    schema["required"] = ["template", "line1", "highlight", "original", "caption"]
+    prompt = f"""You prepare quotes for the Amharic TikTok account "መልካም ቃላት" (Good Words).
+The account owner sent this quote. It may end with the author's name after a dash:
+
+{text}
+
+Translate it faithfully into natural, correct Amharic (Ge'ez script), with correct punctuation (፣ and ።).
+Keep the meaning exactly; don't add ideas, slogans or summaries that are not in the original.
+Split the translation into the layout fields below. Every field must be a piece of the translated quote itself.
+"highlight" is the 1-3 most important words, shown big. Leave sub and/or cta empty for short quotes.
+
+Layouts:
+- "hero": parchment, huge red key word. line1, highlight, line2. Short quotes.
+- "dark": dark moody poster with one symbolic picture. line1, highlight, line2 (or sub/cta for longer quotes).
+- "poster": full-screen dramatic painting. line1, highlight, line2. Strong, short, powerful quotes.
+- "card": portrait of the AUTHOR on top. line1, highlight, sub (use \\n between lines), cta (last sentence).
+- "split": quote on top, picture of the AUTHOR below. Longer, thoughtful quotes. line1, highlight, line2/sub/cta.
+- "minimal": text only. Short, sharp quotes.
+Use "card" or "split" ONLY for a famous historical author who died before {HISTORICAL_CUTOFF}.
+Keep every line under ~22 characters if possible.
+
+"original": the quote exactly as the owner sent it (without the author).
+"author" / "author_en": the author's name in Amharic and English, only if the owner gave one or the quote is
+  famous and reliably attributed; otherwise leave both empty. "author_died": the year they died, or 0 if unknown
+  or still alive. "work": the book or work, if known.
+"caption": the full Amharic quote, then (if there is an author) " — " and the Amharic author name, then:
+  {config.DEFAULT_HASHTAGS}
+"image_prompt": in English, ONLY the subject, setting and mood (no art style words). For "card"/"split": a portrait
+  of the author as traditionally depicted in busts or paintings. Otherwise a scene or symbol with an anonymous
+  figure, never a real person. For "minimal": "".
+"""
+    resp = client().models.generate_content(
+        model=config.GEMINI_TEXT_MODEL,
+        contents=prompt,
+        config=types.GenerateContentConfig(response_mime_type="application/json",
+                                           response_json_schema=schema, temperature=0.3),
+    )
+    q = json.loads(resp.text)
+    q = {k: (v.strip() if isinstance(v, str) else v) for k, v in q.items() if v not in (None, "", 0)}
+    if q.get("sub"):
+        q["sub"] = q["sub"].replace("\\n", "\n")
+
+    # Only credit an author the owner actually named: Gemini likes famous misattributions.
+    last = text.strip().splitlines()[-1] if text.strip() else ""
+    named = bool(re.search(r"(^|\s)[—–-]{1,2}\s*\S", last))
+    if not named:
+        for k in ("author", "author_en", "author_died", "work"):
+            q.pop(k, None)
+        if q.get("caption"):
+            q["caption"] = re.sub(r"\s+—\s+[^#]*?(?=\s#|$)", "", q["caption"], count=1)
+
+    died = int(q.get("author_died") or 0)
+    if q["template"] in PORTRAIT_LAYOUTS and not (q.get("author_en") and 0 != died < HISTORICAL_CUTOFF):
+        q["template"] = "dark"  # never draw portraits of living or unknown people
+        q.pop("image_prompt", None)  # the portrait prompt no longer fits; describe_scene makes a new one
+
+    # Each layout only shows some fields: move text so none of the quote is lost.
+    if q["template"] == "card" and q.get("line2"):
+        q["sub"] = "\n".join(filter(None, [q.pop("line2"), q.get("sub")]))
+    if q["template"] == "hero" and (q.get("sub") or q.get("cta")):
+        q["line2"] = " ".join(filter(None, [q.get("line2"), q.pop("sub", "").replace("\n", " "), q.pop("cta", "")]))
+    return q
 
 
 def describe_scene(q: dict) -> str:
