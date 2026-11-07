@@ -49,6 +49,20 @@ def quote_text(q: dict) -> str:
                                   (q.get("sub") or "").replace("\n", " "), q.get("cta")]))
 
 
+def post_text(q: dict) -> tuple[str, str]:
+    """TikTok title + description: a short Gemini caption, the author and hashtags.
+    Falls back to the full quote if Gemini is unavailable."""
+    if not q.get("short_caption"):
+        try:
+            import gemini_ai
+            q["short_caption"] = gemini_ai.short_caption(q)
+        except Exception as e:
+            print(f"short caption failed for {q['id']}: {e}")
+            return q.get("highlight", ""), caption_for(q)
+    by = f"\n— {q['author']}" if q.get("author") else ""
+    return q["short_caption"], f"{q['short_caption']}{by}\n\n{config.DEFAULT_HASHTAGS}"
+
+
 def caption_for(q: dict) -> str:
     if q.get("caption"):
         return q["caption"]
@@ -267,8 +281,11 @@ def prepare(preview_only: bool = False) -> list[dict]:
         out = (config.OUTPUT if preview_only else config.PUBLIC_POSTS) / f"{day}_{q['id']}.jpg"
         render.render_one(q, out)
         print(f"prepared {q['id']} → {out}")
+        title, caption = post_text(q)
+        if not preview_only:
+            save(config.QUOTES_FILE, quotes)  # keeps the Gemini caption with the quote
         items.append({"id": q["id"], "date": day, "image": out.relative_to(config.ROOT).as_posix(),
-                      "caption": caption_for(q), "title": q.get("highlight", "")})
+                      "caption": caption, "title": title})
     if not preview_only:
         save(TODAY_FILE, items)
     return queue
@@ -317,7 +334,7 @@ def publish() -> None:
         save(config.HISTORY_FILE, history)
         where = {"SEND_TO_USER_INBOX": "sent to your TikTok inbox — open TikTok to post it",
                  "PUBLISH_COMPLETE": f"posted ({result['privacy']})"}.get(result.get("status"), result.get("status"))
-        tg.send_photo(image, caption=f"📤 Quote {label}: {where}")
+        tg.send_photo(image, caption=f"📤 Quote {label}: {where}\n\n📝 Caption:\n{today['caption']}")
 
     if failed:
         save(TODAY_FILE, failed)  # kept so a manual re-run of publish can retry them

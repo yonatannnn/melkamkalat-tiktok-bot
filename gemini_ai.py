@@ -229,6 +229,31 @@ Keep every line under ~22 characters if possible.
     return q
 
 
+def short_caption(q: dict) -> str:
+    """A short Amharic TikTok caption that invites people to think about the quote."""
+    text = " ".join(filter(None, [q.get("line1"), q.get("highlight"), q.get("line2"),
+                                  (q.get("sub") or "").replace("\n", " "), q.get("cta")]))
+    prompt = f"""Write ONE short TikTok caption in natural, everyday Amharic (Ge'ez script) for this quote post
+on the account "መልካም ቃላት". The quote is already on the image:
+
+{text}
+
+Rules:
+- One sentence, at most 60 characters. Natural Amharic a native speaker would write, not a word-for-word translation.
+- Invite the viewer to reflect or relate (a question or a gentle call), e.g. about their own life.
+- Do not repeat the quote, do not name the author, no hashtags, no quotation marks.
+- You may end with one fitting emoji.
+Reply with the caption only."""
+    resp = client().models.generate_content(
+        model=config.GEMINI_TEXT_MODEL, contents=prompt,
+        config=types.GenerateContentConfig(temperature=0.8),
+    )
+    cap = (resp.text or "").strip().strip('"').strip("«»").splitlines()[0].strip()
+    if not cap or not any("\u1200" <= ch <= "\u137f" for ch in cap):
+        raise RuntimeError(f"bad caption from Gemini: {cap!r}")
+    return cap[:90]
+
+
 def describe_scene(q: dict) -> str:
     """For quotes from his own list that have no image_prompt, invent one."""
     text = " ".join(filter(None, [q.get("line1"), q.get("highlight"), q.get("line2"),
