@@ -19,5 +19,48 @@
     "caption": "ለንቀት ብቸኛው መልስ ርቀት ነው። #መልካምቃላት #ethiopia #amharic #quotes",
     "image_prompt": "Centered on a plain parchment background with nothing behind them, a head-and-shoulders portrait sketch depicts an anonymous fictional person gazing directly at the viewer with a serene, stoic expression that exudes quiet dignity and peaceful detachment.",
     "image": "generated/q002.png"
+  },
+  {
+    "template": "card",
+    "line1": "ታላቅ ሰው",
+    "highlight": "ከራሱ ይጠብቃል",
+    "sub": "ትንሽ ሰው ግን",
+    "cta": "ከሌሎች ይጠብቃል።",
+    "author": "ኮንፊሽየስ",
+    "id": "q003",
+    "source": "owner",
+    "image_prompt": "Centered against a plain parchment background with nothing behind them, a head-and-shoulders portrait sketch depicts an anonymous figure looking directly forward with a calm, resolute expression and an unwavering gaze that radiates quiet self-reliance and stoic dignity.",
+    "image": "generated/q003.png"
+  },
+  {
+    "template": "dark",
+    "line1": "ሌሎችን የሚያውቅ አዋቂ ነው፤",
+    "highlight": "ራሱን የሚያውቅ",
+    "line2": "ግን ጥበበኛ ነው።",
+    "author": "ላኦ ዙ",
+    "id": "q004",
+    "source": "owner",
+    "image_prompt": "Centered within pitch darkness, an anonymous, translucent figure sits in deep reflection as a brilliant, infinite galaxy radiates outward from within their own chest into a handheld mirror, capturing the quiet enlightenment of discovering true wisdom inside oneself.",
+    "image": "generated/q004.png"
+  },
+  {
+    "template": "poster",
+    "line1": "ሁሉም ሰው የምትመስለውን ያያል፤",
+    "highlight": "እውነተኛ ማንነትህን",
+    "line2": "የሚያውቁት ጥቂቶች ናቸው።",
+    "author": "ማኪያቬሊ",
+    "id": "q005",
+    "source": "owner",
+    "image_prompt": "Dominating the upper and middle section of a tall vertical scene, a mysterious, cloaked figure holds up a brilliant, smiling mask toward a crowd of indistinct silhouettes below, while a subtle tear in the disguise reveals a fragile, glowing inner core visible only to a single understanding soul quietly observing from close by.",
+    "image": "generated/q005.png"
+  },
+  {
+    "template": "minimal",
+    "line1": "ፍላጎት በበረታበት ቦታ፣",
+    "highlight": "ችግር",
+    "line2": "ሊበረታ አይችልም።",
+    "author": "ማኪያቬሊ",
+    "id": "q006",
+    "source": "owner"
   }
 ]
