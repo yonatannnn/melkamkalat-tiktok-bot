@@ -50,17 +50,20 @@ def quote_text(q: dict) -> str:
 
 
 def post_text(q: dict) -> tuple[str, str]:
-    """TikTok title + description: a short Gemini caption, the author and hashtags.
+    """TikTok title + description: a 3-paragraph Gemini caption, the author and hashtags.
     Falls back to the full quote if Gemini is unavailable."""
-    if not q.get("short_caption"):
+    if not q.get("post_caption"):
         try:
             import gemini_ai
-            q["short_caption"] = gemini_ai.short_caption(q)
+            q["post_caption"] = gemini_ai.post_caption(q)
         except Exception as e:
-            print(f"short caption failed for {q['id']}: {e}")
+            print(f"caption failed for {q['id']}: {e}")
             return q.get("highlight", ""), caption_for(q)
-    by = f"\n— {q['author']}" if q.get("author") else ""
-    return q["short_caption"], f"{q['short_caption']}{by}\n\n{config.DEFAULT_HASHTAGS}"
+    cap = q["post_caption"]
+    first = re.split(r"(?<=[።?!፧])\s", cap.split("\n")[0].strip())[0]
+    title = first if len(first) <= 90 else first[:89].rstrip() + "…"
+    by = f"\n\n— {q['author']}" if q.get("author") else ""
+    return title, f"{cap}{by}\n\n{config.DEFAULT_HASHTAGS}"
 
 
 def caption_for(q: dict) -> str:

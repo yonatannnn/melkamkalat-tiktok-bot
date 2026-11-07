@@ -229,29 +229,38 @@ Keep every line under ~22 characters if possible.
     return q
 
 
-def short_caption(q: dict) -> str:
-    """A short Amharic TikTok caption that invites people to think about the quote."""
+def post_caption(q: dict) -> str:
+    """A TikTok caption of at least 3 short paragraphs in natural Amharic, about the quote."""
     text = " ".join(filter(None, [q.get("line1"), q.get("highlight"), q.get("line2"),
                                   (q.get("sub") or "").replace("\n", " "), q.get("cta")]))
-    prompt = f"""Write ONE short TikTok caption in natural, everyday Amharic (Ge'ez script) for this quote post
-on the account "መልካም ቃላት". The quote is already on the image:
+    who = q.get("author_en") or q.get("author")
+    by = f" (by {who})" if who else ""
+    prompt = f"""Write a TikTok caption in natural, everyday Amharic (Ge'ez script) for this quote post{by}
+on the account "መልካም ቃላት" (Good Words). The quote is already on the image:
 
 {text}
 
+Write exactly 3 short paragraphs, separated by one blank line:
+1. A hook: one or two sentences that make the viewer stop and relate it to their own life.
+2. The meaning: two or three sentences explaining the idea of the quote in simple words, with a real-life example.
+3. A call to action: one or two sentences inviting them to comment, save or share.
+
 Rules:
-- One sentence, at most 60 characters. Natural Amharic a native speaker would write, not a word-for-word translation.
-- Invite the viewer to reflect or relate (a question or a gentle call), e.g. about their own life.
-- Do not repeat the quote, do not name the author, no hashtags, no quotation marks.
-- You may end with one fitting emoji.
+- Natural Amharic a native speaker would write, not a word-for-word translation. Warm and respectful.
+- Do not invent facts about the author. Do not quote the author's other words.
+- No hashtags, no headings, no numbering, no quotation marks. At most one emoji per paragraph.
+- This is a photo post, not a video: call it "ፖስት", never "ቪዲዮ".
+- Under 700 characters in total.
 Reply with the caption only."""
     resp = client().models.generate_content(
         model=config.GEMINI_TEXT_MODEL, contents=prompt,
         config=types.GenerateContentConfig(temperature=0.8),
     )
-    cap = (resp.text or "").strip().strip('"').strip("«»").splitlines()[0].strip()
-    if not cap or not any("\u1200" <= ch <= "\u137f" for ch in cap):
-        raise RuntimeError(f"bad caption from Gemini: {cap!r}")
-    return cap[:90]
+    cap = (resp.text or "").strip().strip('"')
+    paras = [p.strip() for p in re.split(r"\n\s*\n", cap) if p.strip()]
+    if len(paras) < 3 or not any("\u1200" <= ch <= "\u137f" for ch in cap):
+        raise RuntimeError(f"bad caption from Gemini: {cap[:200]!r}")
+    return "\n\n".join(paras)
 
 
 def describe_scene(q: dict) -> str:
