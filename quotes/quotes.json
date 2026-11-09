@@ -63,5 +63,124 @@
     "id": "q006",
     "source": "owner",
     "post_caption": "አንዳንዴ በህይወታችን ትልቅ ፈተና ገጠመን ብለን የምንተወው ነገር፣ በእርግጥ የችግሩ ግዝፈት ሳይሆን የፍላጎታችን ማነስ ሊሆን ይችላል። እውነት የምንፈልገውን ነገር ለማግኘት የውስጥ ፍላጎታችን ምን ያህል የረታ ነው? 💡\n\nየዛሬው ፖስታችን የሚያስታውሰን የቱንም ያህል መንገድ ቢከብድ፣ እውነተኛ ፍላጎት ካለ እንቅፋቶችን ማለፍ እንደሚቻል ነው። ለምሳሌ አዲስ ስራ ለመጀመር ወይም ትምህርት ለመማር ሙሉ ፍላጎት ካለን፣ ድካምም ሆነ የጊዜ ማጣት ሊያቆመን አይችልም። 🌿\n\nይህ ፖስት ከተመቻችሁ ሴቭ አድርጋችሁ ለወዳጆቻችሁ ሼር አድርጉት፣ እንዲሁም የእርስዎን ሃሳብ በኮመንት ያካፍሉን። 🙏"
+  },
+  {
+    "template": "hero",
+    "line1": "ጨለማን በጨለማ ማራቅ አይቻልም፤",
+    "highlight": "ብርሃን ብቻ",
+    "line2": "ነው የሚያጠፋው።",
+    "author": "ማርቲን ሉተር ኪንግ",
+    "id": "q007",
+    "source": "owner",
+    "image_prompt": "Positioned along a shadowy, winding road in the lower and middle composition, a solitary hooded traveller holds aloft a glowing lantern that casts a warm, radiant light to dispel the surrounding gloom, standing beneath a vast, uncluttered pale sky that fills the top third of the scene.",
+    "image": "generated/q007.png",
+    "post_caption": "አንዳንዴ በሰዎች በደል ወይም መጥፎ ባህሪ ስንበሳጭ በተመሳሳይ መንገድ መልስ ለመስጠት እንፈተናለን። ነገር ግን በጥላቻና በቁጣ የተጀመረ ነገር መቼ ሰላም አምጥቶ ያውቃል? 🖤\n\nይህ አባባል መጥፎን ነገር ማሸነፍ የሚቻለው በበጎነት ብቻ መሆኑን ያሳየናል። ለምሳሌ በስራ ቦታ ወይም በቤተሰብ ውስጥ አንዱ ሲቆጣ እኛ በረጋ መንፈስና በፍቅር ብንመልስ፡ የነበረውን ጥል በቀላሉ ማብረድ እንችላለን። 💡\n\nይህን ፖስት ከወደዳችሁት ለወዳጆቻችሁ ሼር አድርጉት፤ እናንተስ ስለዚህ ሀሳብ ምን ታስባላችሁ? ኮመንት ላይ አጋሩን። 🙏"
+  },
+  {
+    "template": "dark",
+    "line1": "የማይፈተን ህይወት",
+    "highlight": "ዋጋ",
+    "line2": "የለውም።",
+    "author": "ሶቅራጥስ",
+    "id": "q008",
+    "source": "owner",
+    "image_prompt": "Centered within a void of pitch darkness, an anonymous faceless figure stands stoically as a glowing golden flame bursts through the cracks of its chest, symbolizing the profound light and value forged through life's trials.",
+    "image": "generated/q008.png",
+    "post_caption": "ህይወት አንዳንዴ በፈተና ስትሞላ ተስፋ የመቁረጥ ስሜት ይሰማናል አይደል? ነገር ግን እነዚህ አስቸጋሪ ጊዜያት ናቸው እውነተኛ ማንነታችንንና ጥንካሬያችንን የሚያወጡት። 💭\n\nሶቅራጥስ በዚህ ፖስት ላይ የሚያስታውሰን ህይወት ያለ ፈተና ትርጉም እንደሌላት ነው። እንደ አዲስ ስራ ወይም ትምህርት ያሉ አስቸጋሪ ነገሮችን አልፈን ስንወጣ ነው እራሳችንንና አቅማችንን በደንብ የምናውቀው። ፈተናዎች የዕድገታችን መሰረት ናቸው። 🌱\n\nይህ ፖስት ከተመቻችሁ በኋላ እንድታገኙት ሴቭ አድርጉት ወይም ለወዳጅዎ ሼር አድርጉት። እናንተስ በህይወታችሁ ትልቅ ትምህርት የሰጣችሁ ፈተና ምን ነበር? ሀሳባችሁን ኮመንት ላይ አጋሩን። ❤️"
+  },
+  {
+    "template": "poster",
+    "line1": "ትልቁ ድል ጠላትን ማሸነፍ ሳይሆን",
+    "highlight": "ራስን ማሸነፍ",
+    "line2": "ነው።",
+    "author": "ፕላቶ",
+    "id": "q009",
+    "source": "owner",
+    "image_prompt": "In a dramatic vertical illustration, a faceless luminous figure occupying the upper and middle section of the frame serenely steps out of a crumbling, shadowy replica of itself into a radiant burst of golden light, capturing the quiet triumph of self-mastery over defeating an external enemy.",
+    "image": "generated/q009.png",
+    "post_caption": "አብዛኛውን ጊዜ ትልቁ ፈተናችን የውጭ ሰው ሳይሆን የራሳችን ስሜትና ልማድ ነው። ዛሬስ ከራሳችሁ ጋር ተታግላችሁ ያሸነፋችሁበት ነገር አለ? 🤔\n\nሰውን ማሸነፍ ቀላል ሊሆን ይችላል፤ እውነተኛው ጥንካሬ ግን የራሳችንን ቁጣ፣ ስንፍና ወይም መጥፎ ልማድ ማሸነፍ ነው። በየቀኑ ከትናንቱ የተሻለ ሰው ለመሆን የምናደርገው ጥረት ነው ትልቁ ስኬታችን። 💡\n\nይህ ፖስት ከተመቻችሁ ሴቭ አድርጉት ወይም ለወዳጆቻችሁ ሼር አድርጉ። እናንተስ ራስን ማሸነፍ ሲባል ምን ይገባችኋል፣ በኮሜንት አውሩን! ✨"
+  },
+  {
+    "template": "minimal",
+    "line1": "ትላንት ታሪክ ነው፤ ነገ ምስጢር ነው፤",
+    "highlight": "ዛሬ",
+    "sub": "ግን",
+    "cta": "የተሰጠ ስጦታ ነው።",
+    "author": "ኤሌኖር ሩዝቬልት",
+    "id": "q010",
+    "source": "owner",
+    "post_caption": "አንዳንዴ ያለፈው ነገር ቁጭት ወይም የነገው ስጋት በደስታ ሳንኖር ቀናችንን እንዲወስድብን እንፈቅዳለን፤ አይደል? 😊\n\nትላንት አልፏል ልንመልሰው አንችልም፤ ነገም ገና ስላልመጣ እርግጠኛ አይደለንም። ዛሬ ግን በእጃችን ያለችው እውነተኛ እድላችን ስለሆነች በጥሩ ሁኔታ ልንኖራት ይገባል። ለምሳሌ አሁን ከአንድ ወዳጃችን ጋር የምንጠጣውን ቡና ወይም ከቤተሰብ ጋር የምናሳልፈውን አጭር ጊዜ በጥሩ ስሜት ማሳለፍ የቀናችን ትልቁ ስጦታ ነው። 🌿\n\nይህ ፖስት ካስተማራችሁ ለምትወዱት ሰው ሼር በማድረግ ያጋሩት፤ ለበኋላም ሴቭ አድርገው ያስቀምጡት። 💛"
+  },
+  {
+    "template": "hero",
+    "line1": "የወደፊት ህይወትህን መተንበይ የምትችለው",
+    "highlight": "አንተ ራስህ",
+    "line2": "ስትፈጥረው ነው።",
+    "author": "አብርሃም ሊንከን",
+    "id": "q011",
+    "source": "owner"
+  },
+  {
+    "template": "dark",
+    "line1": "ስህተት ሰርቶ የማያውቅ ሰው",
+    "highlight": "አዲስ ነገር ሞክሮ",
+    "line2": "አያውቅም።",
+    "author": "አልበርት አንስታይን",
+    "id": "q012",
+    "source": "owner"
+  },
+  {
+    "template": "poster",
+    "line1": "ዕውቀት ኃይል ነው፤",
+    "highlight": "ተግባር ግን",
+    "line2": "ውጤት ነው።",
+    "author": "ፍራንሲስ ቤከን",
+    "id": "q013",
+    "source": "owner"
+  },
+  {
+    "template": "minimal",
+    "line1": "ፍርሃትህን ስትጋፈጠው",
+    "highlight": "ጥንካሬህ",
+    "line2": "ይጨምራል።",
+    "author": "ኔልሰን ማንዴላ",
+    "id": "q014",
+    "source": "owner"
+  },
+  {
+    "template": "hero",
+    "line1": "ውድቀት ማለት እንደገና",
+    "highlight": "በብልሃት ለመጀመር",
+    "line2": "የሚሰጥ ዕድል ነው።",
+    "author": "ሄንሪ ፎርድ",
+    "id": "q015",
+    "source": "owner"
+  },
+  {
+    "template": "dark",
+    "line1": "በትንሽ ነገር ደስተኛ መሆን",
+    "highlight": "የእውነተኛ ባለጠግነት",
+    "line2": "ምስጢር ነው።",
+    "author": "ሴኔካ",
+    "id": "q016",
+    "source": "owner"
+  },
+  {
+    "template": "poster",
+    "line1": "የማትችለውን ነገር በማሰብ",
+    "highlight": "የምትችለውን መስራት",
+    "line2": "አታቋርጥ።",
+    "author": "ጆን ውደን",
+    "id": "q017",
+    "source": "owner"
+  },
+  {
+    "template": "minimal",
+    "line1": "ተስፋ መቁረጥ ለድል አድራጊዎች",
+    "highlight": "የተፈቀደ ምርጫ",
+    "line2": "አይደለም።",
+    "author": "ዊንስተን ቸርችል",
+    "id": "q018",
+    "source": "owner"
   }
 ]
