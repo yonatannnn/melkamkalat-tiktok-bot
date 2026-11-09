@@ -87,11 +87,15 @@ def parse_owner_quote(text: str) -> dict | None:
       line1 / *highlight* / sub... / last line (2+)    → card layout (last line goes in the brown pill)
     A highlight may also be inline:  "ለንቀት ብቸኛው መልስ *ርቀት ነው።*"
     """
+    text = text.replace("\u200b", "").replace("\ufeff", "")  # invisible characters from copy-paste
     lines = [l.strip() for l in text.strip().splitlines() if l.strip()]
     author = ""
     if lines and lines[-1][:1] in ("—", "-", "–"):
         author = lines.pop().lstrip("—–- ").strip()
     idx = next((i for i, l in enumerate(lines) if "*" in l), None)
+    if idx is None and len(lines) == 3:
+        lines[1] = f"*{lines[1]}*"  # 3 lines without stars: the middle line is the key word
+        idx = 1
     if idx is None:
         return None
     hl_line = lines[idx]
@@ -122,7 +126,7 @@ def rotate_layout(base: str, quotes: list[dict]) -> str:
     return cycle[n % len(cycle)]
 
 
-HELP = ("Send a quote with the key word in *stars*:\n\n"
+HELP = ("Send a quote with the key word in *stars* (for 3 lines, the middle line is used if there are no stars):\n\n"
         "ራስህን ማሻሻል ስትጀምር፣\n*ብቸኝነት*\nየምትከፍለው ዋጋ ነው።\n\n"
         "3 lines → big red word style. 4+ lines → card style (last line in the brown box).\n"
         "Optional last line: — Author (e.g. — ሶቅራጥስ)\n\n"
