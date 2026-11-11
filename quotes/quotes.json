@@ -164,7 +164,10 @@
     "line2": "የሚሰጥ ዕድል ነው።",
     "author": "ሄንሪ ፎርድ",
     "id": "q015",
-    "source": "owner"
+    "source": "owner",
+    "image_prompt": "Under a vast, softly lit pale sky filling the top third of the canvas, an anonymous, cloaked traveler pauses along a muddy mountain road at dawn, taking a thoughtful step forward as golden sunlight cuts through fading storm clouds to illuminate a new path ahead.",
+    "image": "generated/q015.png",
+    "post_caption": "ያቀዱት ነገር ሳይሳካ ቀርቶ ተስፋ የቆረጡበት ጊዜ አለ? ይህ የጉዞዎ ማብቂያ ሳይሆን የአዲስ ስኬት መጀመሪያ ሊሆን ይችላል። 😊\n\nውድቀት ማለት መሸነፍ ሳይሆን ከነበሩብን ስህተቶች የምንማርበት ትልቅ አጋጣሚ ነው። ለምሳሌ የጀመርነው ስራ ቢበላሽብን፡ በሁለተኛው ሙከራችን በበለጠ ልምድና ብልሃት እንድንጀምር ይረዳናል። 💡\n\nይህ ፖስት ብርታት ከሆነዎ ለወዳጅዎ ሼር አድርጉት፡ ለበኋላ እንዲሆኖትም ሴቭ ማድረጎትን አትርሱ። 🙏"
   },
   {
     "template": "dark",
@@ -173,7 +176,10 @@
     "line2": "ምስጢር ነው።",
     "author": "ሴኔካ",
     "id": "q016",
-    "source": "owner"
+    "source": "owner",
+    "image_prompt": "Centered within a vast pitch-black void, an anonymous silhouette gently cradles a single tiny glowing seed in cupped hands, casting a warm golden light that illuminates the profound, boundless wealth found in life's smallest moments.",
+    "image": "generated/q016.png",
+    "post_caption": "ደስታን ለማግኘት ሁልጊዜ ትልቅ ነገር መጠበቅ ሰልችቶዎታል? እውነተኛ ሰላም የሚጀምረው ዛሬ በእጃችን ባለው ትንሽ ነገር መደሰት ስንጀምር ነው። 😊\n\nባለጠግነት ማለት ብዙ ሀብት ማከማቸት ብቻ አይደለም። ከወዳጅ ጋር የሚጠጡት አንድ ሲኒ ቡና ወይም ከቤተሰብ ጋር የሚያሳልፉት የሳቅ ጊዜ ከምንም በላይ ህይወትን ባለጸጋ ያደርጋታል። ☕\n\nይህ ፖስት ከተመቻችሁ ለምትወዱት ሰው ሼር ያድርጉት ወይም ሴቭ አድርገው ያስቀምጡት። ዛሬ ደስ ያላችሁ ትንሽ ነገር ምንድን ናት? 💭"
   },
   {
     "template": "poster",
@@ -182,7 +188,10 @@
     "line2": "አታቋርጥ።",
     "author": "ጆን ውደን",
     "id": "q017",
-    "source": "owner"
+    "source": "owner",
+    "image_prompt": "Dominating the upper and middle sections of a dramatic vertical illustration, a hooded anonymous figure stands atop a sheer precipice, calmly constructing a luminous bridge one glowing stone at a time while steadfastly ignoring the colossal, storm-wrapped mountain peak that towers impossibly above them.",
+    "image": "generated/q017.png",
+    "post_caption": "አንዳንድ ጊዜ ማድረግ በማንችለው ነገር ላይ ከልክ በላይ በመጨነቅ፣ አሁን በእጃችን ያለውን እና የምንችለውን ጥንካሬ ሳንጠቀምበት እንቀራለን። 💭\n\nይህ ፖስት የሚያስታውሰን ትኩረታችን በእጃችን ባለው ነገር ላይ መሆን እንዳለበት ነው። ለምሳሌ ትልቅ ቢዝነስ ለመጀመር ሙሉ አቅም ባይኖረን እንኳ፣ አሁን ማድረግ የምንችለውን ትንሽ እውቀት መቅሰም ወይም ማቀድ እንችላለን። ዋናው ነገር ባለን ነገር መጀመር ነው። 🎯\n\nይህ ፖስት ከተመቻችሁ ለጓደኞቻችሁ ሼር አድርጉት፤ ለቀጣይም እንዲጠቅማችሁ ሴቭ ማድረጋችሁን አትርሱ። ❤️"
   },
   {
     "template": "minimal",
@@ -191,6 +200,7 @@
     "line2": "አይደለም።",
     "author": "ዊንስተን ቸርችል",
     "id": "q018",
-    "source": "owner"
+    "source": "owner",
+    "post_caption": "በህይወታችሁ ነገሮች ሁሉ ከብደዋችሁ ተስፋ ለመቁረጥ ያሰባችሁበት ወቅት አለ? ነገር ግን የያዛችሁትን ትልቅ ህልም ስታስቡ እጅ መስጠት ፈፅሞ አማራጭ እንዳልሆነ ይገባችኋል። 💭\n\nአሸናፊ ሰዎች ፈተና አይገጥማቸውም ማለት አይደለም፣ ልዩነቱ ምንም ቢፈጠር እጃቸውን ላለመስጠት መወሰናቸው ነው። ለምሳሌ በስራ ወይም በትምህርት መንገድ ላይ እንቅፋት ቢገጥመንም ጥረታችንን ካላቆምን ውጤቱ ማማሩ አይቀርም። ውድቀት የጉዞው አካል እንጂ ማጠቃለያው አይደለም። ✨\n\nይህ ፖስት ብርታት ከሆነላችሁ ለምትወዱት ሰው ሼር አድርጉት፤ በኋላ ላይ መልሳችሁ ለማንበብም ሴቭ አድርጉት። 🙏"
   }
 ]
