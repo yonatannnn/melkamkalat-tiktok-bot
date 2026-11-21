@@ -210,7 +210,10 @@
     "author": "አርስቶትል",
     "source": "owner",
     "id": "q019",
-    "template": "hero"
+    "template": "hero",
+    "image_prompt": "Positioned in the lower and middle region of the composition, an anonymous traveler in a weathered cloak walks along a steep, dusty mountain path toward a solitary, vibrant tree bearing glowing golden fruit, set beneath an expansive, uncluttered pale sky that fills the top third of the frame.",
+    "image": "generated/q019.png",
+    "post_caption": "በህይወታችሁ ያሰባችሁት ነገር ዘገየ ብላችሁ ተስፋ የቆረጣችሁበት ጊዜ አለ? ⌛\n\nአርስቶትል በዚህ ፖስት ላይ እንዳለው፣ ማንኛውም ትልቅ ውጤት በጊዜና በትዕግስት ነው የሚገኘው። ለምሳሌ ለዓመታት ደክመው የሚማሩ ተማሪዎች የምረቃ ቀናቸውን ሲያዩ ድካማቸውን እንደሚረሱት ሁሉ ነው። መታገሱ ቢከብድም መጨረሻው ግን ሁልጊዜ የሚያኮራ ነው። 🌱\n\nትዕግስት ለሚያስፈልገው ወዳጃችሁ ይህንን ፖስት ሼር አድርጉለት፣ ወይም በኋላ ለማንበብ ሴቭ አድርጉት። 🤍"
   },
   {
     "line1": "አንድ ሰው ራሱን ካልረዳ",
@@ -219,7 +222,10 @@
     "author": "አብርሃም ሊንከን",
     "source": "owner",
     "id": "q020",
-    "template": "dark"
+    "template": "dark",
+    "image_prompt": "Centered within an expanse of pitch-black darkness, an anonymous faceless figure reaches down with its own glowing hands to pull itself upward out of a shadowy abyss, igniting a warm, resilient light from within its own chest.",
+    "image": "generated/q020.png",
+    "post_caption": "በሕይወታችን ውስጥ አንዳንዴ ሌሎች እንዲረዱን እንጠብቃለን፤ ግን እኛ ራሳችን ለመለወጥ የመጀመሪያውን እርምጃ ወስደናል? 💭\n\nይህ ፖስት የሚያስታውሰን ማንኛውም ለውጥ የሚጀምረው ከራሳችን እንደሆነ ነው። ለምሳሌ አዲስ ሙያ መማር ብንፈልግ ሰዎች መንገድ ሊያሳዩን ይችላሉ፤ ጥረቱን ግን እኛ ራሳችን ካላደረግን ምንም ውጤት አይኖረውም። 🌱\n\nይህን መልዕክት ከወደዱት ለወዳጅ ዘመድዎ ሼር ያድርጉት፤ እንዲሁም የእርስዎን ሃሳብ በኮመንት ያጋሩን። 🙏"
   },
   {
     "line1": "ጥበብ የሚጀምረው",
@@ -228,7 +234,10 @@
     "author": "ሶቅራጥስ",
     "source": "owner",
     "id": "q021",
-    "template": "poster"
+    "template": "poster",
+    "image_prompt": "Positioned in the upper and middle sections of a tall vertical illustration, an anonymous, hooded figure stands atop a towering cliff of glowing, open books, gazing upward in breathless wonder as a swirling cosmic expanse of vibrant constellations and luminous light unravels into the starry night.",
+    "image": "generated/q021.png",
+    "post_caption": "በዙሪያችን ባሉት ነገሮች እንደ አዲስ የመደነቅ ፍላጎታችንን ስናጣ ህይወት ቀለሟን ታጣለች። ሁሉንም ነገር አውቀዋለሁ ከመለት ይልቅ እንደ አዲስ ልጅ ለመማር ዝግጁ መሆን የዕድገት መጀመሪያ ነው። 🌟\n\nጥበብ ማለት ትላልቅ መጻሕፍትን ማከማቸት ብቻ አይደለም። ለምሳሌ አንዲት ትንሽ ዘር እንዴት ግዙፍ ዛፍ እንደምትሆን ስናስተውል፣ ያ የመደነቅ ስሜት አዳዲስ ነገሮችን እንድንመረምር ያደርገናል። ጥያቄ የሚጠይቅ አእምሮ ሁልጊዜም እውቀትን ይሸምታል። 💭\n\nይህንን ፖስት ለምትወዱት ሰው ሼር በማድረግ መልካም ሀሳብን ያካፍሉ። በቅርቡ ያስገረማችሁን ነገር ደግሞ ኮመንት ላይ ያውሩን። 📌"
   },
   {
     "line1": "ህልምህን ለማሳካት",
@@ -237,7 +246,8 @@
     "author": "የቻይና ምሳሌ",
     "source": "owner",
     "id": "q022",
-    "template": "minimal"
+    "template": "minimal",
+    "post_caption": "አንዳንዴ ለህልማችን የምናደርገው ጥረት ከባድና አሰልቺ ሊሆንብን ይችላል። ነገር ግን ከዓመታት በኋላ ምነው በሞከርኩት ብሎ ከመጸጸት በላይ የሚጎዳ ነገር የለም። 💡\n\nዛሬ ለትምህርት አድሮ ማጠናት ወይም አዲስ ስራ ለመጀመር መልፋት ድካም ቢኖረውም ጊዜያዊ ነው። አሁን የምንከፍለው ትንሽ መስዋዕትነት በኋላ ከሚሰማን የዘላቂ ፀፀት ስሜት እጅግ ያነሰ ነው። 🌱\n\nይህ ፖስት ብርታት ከሆኖት ለወዳጅዎ ያካፍሉት ወይም በኋላ ለማንበብ ሴቭ ያድርጉት። እርስዎ አሁን የትኛውን ህልምዎን ለማሳካት እየደከሙ እንደሆነ በኮመንት ያጋሩን። 🙏"
   },
   {
     "line1": "ትልቅ ለውጥ የሚመጣው",
