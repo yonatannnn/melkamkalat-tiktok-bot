@@ -202,5 +202,185 @@
     "id": "q018",
     "source": "owner",
     "post_caption": "በህይወታችሁ ነገሮች ሁሉ ከብደዋችሁ ተስፋ ለመቁረጥ ያሰባችሁበት ወቅት አለ? ነገር ግን የያዛችሁትን ትልቅ ህልም ስታስቡ እጅ መስጠት ፈፅሞ አማራጭ እንዳልሆነ ይገባችኋል። 💭\n\nአሸናፊ ሰዎች ፈተና አይገጥማቸውም ማለት አይደለም፣ ልዩነቱ ምንም ቢፈጠር እጃቸውን ላለመስጠት መወሰናቸው ነው። ለምሳሌ በስራ ወይም በትምህርት መንገድ ላይ እንቅፋት ቢገጥመንም ጥረታችንን ካላቆምን ውጤቱ ማማሩ አይቀርም። ውድቀት የጉዞው አካል እንጂ ማጠቃለያው አይደለም። ✨\n\nይህ ፖስት ብርታት ከሆነላችሁ ለምትወዱት ሰው ሼር አድርጉት፤ በኋላ ላይ መልሳችሁ ለማንበብም ሴቭ አድርጉት። 🙏"
+  },
+  {
+    "line1": "ትዕግስት መራራ ብትሆንም",
+    "highlight": "ፍሬዋ ግን",
+    "line2": "ጣፋጭ ነው።",
+    "author": "አርስቶትል",
+    "source": "owner",
+    "id": "q019",
+    "template": "hero"
+  },
+  {
+    "line1": "አንድ ሰው ራሱን ካልረዳ",
+    "highlight": "ማንም ሰው",
+    "line2": "ሊረዳው አይችልም።",
+    "author": "አብርሃም ሊንከን",
+    "source": "owner",
+    "id": "q020",
+    "template": "dark"
+  },
+  {
+    "line1": "ጥበብ የሚጀምረው",
+    "highlight": "በመደነቅ",
+    "line2": "ነው።",
+    "author": "ሶቅራጥስ",
+    "source": "owner",
+    "id": "q021",
+    "template": "poster"
+  },
+  {
+    "line1": "ህልምህን ለማሳካት",
+    "highlight": "የምትከፍለው ዋጋ",
+    "line2": "ከፀፀት ያነሰ ነው።",
+    "author": "የቻይና ምሳሌ",
+    "source": "owner",
+    "id": "q022",
+    "template": "minimal"
+  },
+  {
+    "line1": "ትልቅ ለውጥ የሚመጣው",
+    "highlight": "ከትናንሽ ዕለታዊ",
+    "line2": "ልማዶች ነው።",
+    "author": "ጄምስ ክሊር",
+    "source": "owner",
+    "id": "q023",
+    "template": "hero"
+  },
+  {
+    "line1": "በንግግር ሳይሆን",
+    "highlight": "በተግባርህ",
+    "line2": "ማንነትህን አሳይ።",
+    "author": "ሴኔካ",
+    "source": "owner",
+    "id": "q024",
+    "template": "dark"
+  },
+  {
+    "line1": "ስኬት ማለት ከውድቀት ወደ ውድቀት",
+    "highlight": "ተስፋ ሳይቆርጡ",
+    "line2": "መጓዝ ነው።",
+    "author": "ዊንስተን ቸርችል",
+    "source": "owner",
+    "id": "q025",
+    "template": "poster"
+  },
+  {
+    "line1": "በችግር ጊዜ የማይፈተን ወዳጅ",
+    "highlight": "እውነተኛ ወዳጅ",
+    "line2": "አይደለም።",
+    "author": "ኢዩሪፒደስ",
+    "source": "owner",
+    "id": "q026",
+    "template": "minimal"
+  },
+  {
+    "line1": "አእምሮህን ካላሰለጠንከው",
+    "highlight": "የሌሎች ሀሳብ",
+    "line2": "ባሪያ ትሆናለህ።",
+    "author": "ማርከስ ኦሬሊየስ",
+    "source": "owner",
+    "id": "q027",
+    "template": "hero"
+  },
+  {
+    "line1": "ጊዜህ ውስን ነው፤ ስለዚህ",
+    "highlight": "የሌላ ሰውን ህይወት",
+    "line2": "በመኖር አታባክነው።",
+    "author": "ስቲቭ ጆብስ",
+    "source": "owner",
+    "id": "q028",
+    "template": "dark"
+  },
+  {
+    "line1": "ብዙ ማዳመጥና ጥቂት መናገር",
+    "highlight": "የብልህ ሰው",
+    "line2": "መለያ ነው።",
+    "author": "ዜኖ",
+    "source": "owner",
+    "id": "q029",
+    "template": "poster"
+  },
+  {
+    "line1": "የምትፈራውን ነገር ስታደርግ",
+    "highlight": "ፍርሃትህ",
+    "line2": "ሞቶ ይቀራል።",
+    "author": "ራልፍ ዋልዶ ኤመርሰን",
+    "source": "owner",
+    "id": "q030",
+    "template": "minimal"
+  },
+  {
+    "line1": "ደስታ የሚገኘው ብዙ በማግኘት ሳይሆን",
+    "highlight": "ጥቂት በመፈለግ",
+    "line2": "ነው።",
+    "author": "ኤፒክቴተስ",
+    "source": "owner",
+    "id": "q031",
+    "template": "hero"
+  },
+  {
+    "line1": "ዛሬ የምትዘራውን ዘር",
+    "highlight": "ነገ በእጥፍ",
+    "line2": "ታጭደዋለህ።",
+    "author": "የኢትዮጵያ ምሳሌ",
+    "source": "owner",
+    "id": "q032",
+    "template": "dark"
+  },
+  {
+    "line1": "ጠንካራ ሰዎች የሚፈጠሩት",
+    "highlight": "በአስቸጋሪ ጊዜያት",
+    "line2": "ውስጥ ነው።",
+    "author": "ኻሊል ጂብራን",
+    "source": "owner",
+    "id": "q033",
+    "template": "poster"
+  },
+  {
+    "line1": "ዓላማ ከሌለህ",
+    "highlight": "የትኛውም ንፋስ",
+    "line2": "ወደ ፈለገበት ይወስድሃል።",
+    "author": "ሴኔካ",
+    "source": "owner",
+    "id": "q034",
+    "template": "minimal"
+  },
+  {
+    "line1": "የሰው ልጅ ትልቁ ጠላት",
+    "highlight": "የራሱ ጥርጣሬ",
+    "line2": "ነው።",
+    "author": "ዊሊያም ሼክስፒር",
+    "source": "owner",
+    "id": "q035",
+    "template": "hero"
+  },
+  {
+    "line1": "ነገርን ሁሉ በእርጋታ መመልከት",
+    "highlight": "የጥበብ ሁሉ",
+    "line2": "መጀመሪያ ነው።",
+    "author": "ላኦ ዙ",
+    "source": "owner",
+    "id": "q036",
+    "template": "dark"
+  },
+  {
+    "line1": "ስራህን በፍቅር ስትሰራ",
+    "highlight": "ድካምህ ሁሉ",
+    "line2": "ደስታ ይሆናል።",
+    "author": "ኻሊል ጂብራን",
+    "source": "owner",
+    "id": "q037",
+    "template": "poster"
+  },
+  {
+    "line1": "ከመናገርህ በፊት",
+    "highlight": "ቃላትህን",
+    "line2": "በልብህ መዝናቸው።",
+    "author": "ኮንፊሽየስ",
+    "source": "owner",
+    "id": "q038",
+    "template": "minimal"
   }
 ]
