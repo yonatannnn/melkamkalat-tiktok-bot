@@ -256,7 +256,10 @@
     "author": "ጄምስ ክሊር",
     "source": "owner",
     "id": "q023",
-    "template": "hero"
+    "template": "hero",
+    "image_prompt": "In the lower half of the frame, an anonymous cloaked figure kneels along an ancient winding road at sunrise to carefully tend a tiny green sprout emerging from the soil, set against a sweeping landscape in the middle ground and a vast, pale, empty morning sky occupying the entire top third.",
+    "image": "generated/q023.png",
+    "post_caption": "ሕይወታችንን በአንድ ጀምበር ለመቀየር አስበን ተስፋ የቆረጥንበት ጊዜ ስንት ይሆን? ሁላችንም አዲስ ነገር ለመጀመር ሁሌም ትልቅ እርምጃ መውሰድ እንዳለብን ይሰማናል። 🌱\n\nነገር ግን እውነተኛ ለውጥ የሚመጣው በየቀኑ በምናደርጋቸው ትናንሽ ነገሮች ነው። ለምሳሌ በየቀኑ አምስት ገጽ ብቻ ማንበብ በዓመት ውስጥ በርካታ መጽሐፍትን ያስጨርሰናል። በየቀኑ የምናደርጋት ትንሽ በጎ ልማድ ከጊዜ በኋላ ሕይወታችንን ሙሉ በሙሉ ትቀይራለች። ✨\n\nይህንን ፖስት ለኋላ እንድታገኙት ሴቭ አድርጉት፤ እንዲሁም በየቀኑ ለመጀመር ያሰባችሁትን ትንሽ ልማድ በኮሜንት አጋሩን። 🤍"
   },
   {
     "line1": "በንግግር ሳይሆን",
@@ -265,7 +268,10 @@
     "author": "ሴኔካ",
     "source": "owner",
     "id": "q024",
-    "template": "dark"
+    "template": "dark",
+    "image_prompt": "Centered in total darkness, an anonymous faceless craftsman silently constructs a brilliant, glowing star with their bare hands while hollow, fading speech bubbles dissolve into dust around them.",
+    "image": "generated/q024.png",
+    "post_caption": "በቃላት ብዙ ተስፋ ሰጥተህ በኋላ ግን በስራ ማሳየት ከብዶህ ያውቃል? ሁላችንም ህይወት ውስጥ የሚያጋጥም እውነት ነው:: 💭\n\nየዛሬው ፖስታችን የሚያስታውሰን ሰዎች የሚያምኑን በምናወራው ሳይሆን በምናደርገው ነገር መሆኑን ነው:: ለምሳሌ ለሰው አሳቢ መሆንህን በቃል ከምትናገር ይልቅ በችግራቸው ጊዜ አጠገባቸው በመገኘት ማሳየት የበለጠ ዋጋ አለው:: ✨\n\nእርስዎስ በዚህ ሀሳብ ይስማማሉ? ፖስቱ ከተመቻችሁ ለወዳጆቻችሁ ሼር ማድረጉንና ሴቭ ማድረጉን አትርሱ:: 📌"
   },
   {
     "line1": "ስኬት ማለት ከውድቀት ወደ ውድቀት",
@@ -274,7 +280,10 @@
     "author": "ዊንስተን ቸርችል",
     "source": "owner",
     "id": "q025",
-    "template": "poster"
+    "template": "poster",
+    "image_prompt": "In a dramatic vertical illustration, an anonymous silhouette occupies the upper and middle section of the frame, persistently climbing a steep, dark mountain of crumbling, broken steps while reaching resolutely toward a radiant, golden sunrise piercing through the gloom above.",
+    "image": "generated/q025.png",
+    "post_caption": "የፈለጉት ነገር ባሰቡት መንገድ አልሳካ ብሎዎት ተስፋ የቆረጡበት ጊዜ አለ? ብዙዎቻችን ውድቀት የመጨረሻው ምዕራፍ ይመስለናል፡ ነገር ግን ትልቁ ስኬት የሚጀምረው እዚያው ላይ ነው። 💭\n\nስኬታማ ሰዎች ፈጽመው ያልወደቁ ሳይሆኑ፡ በወደቁ ቁጥር ተመልሰው ለመነሳት የሞከሩ ናቸው። ለምሳሌ አዲስ ንግድ ሲጀምሩ ወይም አዲስ ነገር ሲለምዱ መጀመሪያ ላይ መውደቅና ስህተት መስራት አይቀሬ ነው፤ ዋናው ቁልፍ ግን ተስፋ ሳናቆርጥ መቀጠላችን ነው። 🌱\n\nይህ ፖስት ብርታት ይሆንላቸዋል የሚሏቸውን ወዳጆችዎን ሼር ያድርጉላቸው፡ እንዳይጠፋዎትም ሴቭ ማድረጉን አትርሱ። 🙏"
   },
   {
     "line1": "በችግር ጊዜ የማይፈተን ወዳጅ",
@@ -283,7 +292,8 @@
     "author": "ኢዩሪፒደስ",
     "source": "owner",
     "id": "q026",
-    "template": "minimal"
+    "template": "minimal",
+    "post_caption": "ህይወት ሲከፋንና ነገሮች ሲበላሹ ከጎናችን የሚቆመው ማን እንደሆነ አስበንበት እናውቃለን? በደስታ ጊዜ አብሮን የሚስቀው ሁሉ እውነተኛ ወዳጃችን ላይሆን ይችላል። 🤍\n\nየሰው ልጅ እውነተኛ ወዳጅነቱ የሚታወቀው ፈተናና ችግር ሲገጥመን ነው። ለምሳሌ በታመምክበት ወይም በቸገረህ ጊዜ አብሮህ የሚጨነቀው ሰው ነው እውነተኛ ወዳጅህ። በደስታህ ቀን ብቻ የሚቀርብህ ሰው ግን ከጎንህ አይቆምም። 🤝\n\nበከባድ ጊዜህ ከጎንህ ያልተለየህን እውነተኛ ወዳጅህን በኮመንት ታግ አድርገው ወይም ይህን ፖስት ሼር አድርገህ አጋራው። ለበለጠ አነቃቂ ሀሳቦች ፖስቱን ሴቭ ማድረግ አትርሳ። 📌"
   },
   {
     "line1": "አእምሮህን ካላሰለጠንከው",
