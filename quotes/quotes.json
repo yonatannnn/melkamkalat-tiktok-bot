@@ -302,7 +302,10 @@
     "author": "ማርከስ ኦሬሊየስ",
     "source": "owner",
     "id": "q027",
-    "template": "hero"
+    "template": "hero",
+    "image_prompt": "In the lower and middle foreground, a solitary cloaked traveler stands firm on a rugged dirt road, holding a glowing lantern against a swirling tide of faceless, shadowy silhouettes that threaten to sweep them away, all beneath a vast, empty pale sky that dominates the top third of the frame.",
+    "image": "generated/q027.png",
+    "post_caption": "አንዳንዴ የራሳችንን ውሳኔ የምንወስድ ይመስለናል፤ ነገር ግን ሳናስበው በሰዎች ሀሳብ ብቻ ስንነዳ እንገኛለን። 🤔\n\nአእምሮአችንን በጥሩ ሀሳብ ካላሰለጠንነውና በራሳችን ማሰብ ካልጀመርን የሌሎች ሰዎች አስተያየት በቀላሉ ይወዛውዘናል። ለምሳሌ በማህበራዊ ሚዲያ የምንሰማውን ሁሉ ሳናመዛዝን ከተቀበልን የራሳችንን እውነተኛ ፍላጎት እናጣለን። 💡\n\nይህ ፖስት ከተመቻችሁ ለወዳጆቻችሁ ሼር ማድረጉንና ለኋላ እንዲሆናችሁ ሴቭ ማድረጉን አትርሱ። እርስዎስ አእምሮዎን ለማሰልጠን ምን ያደርጋሉ? 💭"
   },
   {
     "line1": "ጊዜህ ውስን ነው፤ ስለዚህ",
@@ -311,7 +314,10 @@
     "author": "ስቲቭ ጆብስ",
     "source": "owner",
     "id": "q028",
-    "template": "dark"
+    "template": "dark",
+    "image_prompt": "Centered in absolute darkness, a solitary faceless silhouette peels away a painted mask of another person's visage to expose its own brilliant inner light, while a glowing hourglass suspended inside its chest steadily drops its last grains of golden sand.",
+    "image": "generated/q028.png",
+    "post_caption": "በሰዎች ፍላጎትና አስተያየት ብቻ ለመኖር እየጣርክ የራስህ ህልም ሲረሳ ተሰምቶህ ያውቃል? ⏳\n\nየዛሬው ፖስታችን የሚያስታውሰን ጊዜያችን አጭር መሆኑን ነው። ለምሳሌ ሌሎች ደስ እንዲላቸው ብለን ብቻ የማንወደውን ሙያ ስንመርጥ ውድ ህይወታችንን በከንቱ እያባከንን ነው። የራስህን እውነተኛ መንገድ መከተል ሁልጊዜም ትክክለኛው ውሳኔ ነው። 💡\n\nይህን ፖስት በኋላ እንድታገኘው ሴቭ አድርገው፤ ለቅርብ ወዳጅህም ሼር አድርገው። ከዛሬ ጀምሮ ለራስህ የምትኖረው የትኛውን ህልምህን ነው? ሀሳብህን በኮመንት አጋራን። 🙏"
   },
   {
     "line1": "ብዙ ማዳመጥና ጥቂት መናገር",
@@ -320,7 +326,10 @@
     "author": "ዜኖ",
     "source": "owner",
     "id": "q029",
-    "template": "poster"
+    "template": "poster",
+    "image_prompt": "In a serene full vertical illustration, an anonymous hooded figure with a featureless face occupies the upper and middle canvas in quiet contemplation, gently tilting its head to absorb a glowing cascade of light and swirling soundwaves from the night sky while keeping its hands folded and lips gracefully silent.",
+    "image": "generated/q029.png",
+    "post_caption": "አንዳንድ ጊዜ በንግግር መሃል ከልክ በላይ ተናግረን በኋላ ተፀፅተን አናውቅም? ከብዙ ንግግር ይልቅ በጥቂቱ ተናግሮ ሰውን ማዳመጥ ትልቅ መረጋጋትን ይሰጠናል። 💭\n\nየዚህ ፖስት መልእክት ግልጽ ነው፤ ብልህነት የሚጀምረው የሰዎችን ሃሳብ በትዕግስት ከማዳመጥ ነው። ለምሳሌ ከጓደኛችን ጋር ስንወያይ አስቀድመን ብናደምጥ አለመግባባቶችን በቀላሉ መፍታትና የተሻለ መልስ መስጠት እንችላለን። 💡\n\nይህ ፖስት ከተመቻችሁ ለወዳጅ ዘመድዎ ሼር ያድርጉት፤ አሊያም ለበኋላ እንዲሆኖት ሴቭ ማድረጉን አይርሱ። ❤️"
   },
   {
     "line1": "የምትፈራውን ነገር ስታደርግ",
@@ -329,7 +338,8 @@
     "author": "ራልፍ ዋልዶ ኤመርሰን",
     "source": "owner",
     "id": "q030",
-    "template": "minimal"
+    "template": "minimal",
+    "post_caption": "በህይወትህ ውስጥ ማድረግ እየፈለግክ ነገር ግን በፍርሃት ምክንያት ወደ ኋላ የቀረህበት ነገር አለ? ዛሬ ያንን ፍርሃት የምትሰብርበት ቀን ሊሆን ይችላል። 💡\n\nፍርሃት ትልቅ የሚመስለው ሳንጀምረው በሀሳብ ብቻ ስንጨነቅ ነው። ለምሳሌ በሰው ፊት መናገርን የምትፈራ ከሆነ፡ መድረክ ላይ ወጥተህ መናገር ስትጀምር ፍርሃቱ ወዲያው ይጠፋል። ዋናው ነገር እያፈሩም ቢሆን የመጀመሪያውን እርምጃ መውሰድ ነው። 💪\n\nይህ ፖስት ከተመቸህ ለወዳጆችህ ሼር አድርገውና ለኋላ እንዲሆንህ ሴቭ ማድረጉን አትርሳ። አንተ ለመጋፈጥ የወሰንከው ፍርሃት ምንድን ነው? ኮሜንት ላይ አጋራን። 🙏"
   },
   {
     "line1": "ደስታ የሚገኘው ብዙ በማግኘት ሳይሆን",
