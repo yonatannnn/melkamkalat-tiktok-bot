@@ -394,7 +394,10 @@
     "author": "ዊሊያም ሼክስፒር",
     "source": "owner",
     "id": "q035",
-    "template": "hero"
+    "template": "hero",
+    "image_prompt": "Beneath a vast, empty pale sky occupying the top third of the artwork, a lone cloaked traveler hesitates at a windswept mountain crossroads in the lower half of the frame, staring in quiet conflict at their own dark, towering shadow that stretches across the desolate path like a formidable adversary.",
+    "image": "generated/q035.png",
+    "post_caption": "ስንት ጥሩ እድሎችን በራሳችን ጥርጣሬ ብቻ ሳንሞክራቸው አጥተናል? አንዳንዴ ትልቁ እንቅፋታችን ከውጭ ሳይሆን ከውስጣችን የሚመጣው ፍርሃት ነው። 🤔\n\nአዲስ ስራ ለመጀመር ወይም አዲስ ነገር ለመሞከር ስንል ገና ሳንጀምር እኔ አልችልም ብለን የምንተውበት ጊዜ ብዙ ነው። ሼክስፒር በዛሬው ፖስታችን እንደሚያስታውሰን ጥርጣሬ ሳንሞክረው እንድንተው በማድረግ ትልቅ ጠላታችን ይሆናል። ራሳችንን ማመን ስንጀምር ግን የፈለግነውን ማሳካት እንችላለን። 🌱\n\nይህ ፖስት ከተመቻችሁ እንዳይጠፋችሁ ሴቭ አድርጉት፣ ለሚጠቅመው ወዳጃችሁም ሼር አድርጉት። እናንተስ ጥርጣሬ ያሳጣችሁ ነገር አለ? ኮመንት ላይ ያጋሩን። 💭"
   },
   {
     "line1": "ነገርን ሁሉ በእርጋታ መመልከት",
@@ -403,7 +406,10 @@
     "author": "ላኦ ዙ",
     "source": "owner",
     "id": "q036",
-    "template": "dark"
+    "template": "dark",
+    "image_prompt": "Centered within an expanse of pitch-black darkness, an anonymous, cloaked figure sits in absolute stillness, calmly gazing into a softly glowing sphere of light suspended between its hands, illuminating the profound tranquility of mindful observation amidst the shadow.",
+    "image": "generated/q036.png",
+    "post_caption": "አንዳንዴ በንዴት ወይም በችኮላ የተናገርነው ነገር በኋላ ይቆጨናል። ተረጋግተን ማሰብ ለብዙ ስህተቶቻችን መፍትሔ ይሆን ነበር። 😌\n\nየዛሬው ፖስታችን የሚያስታውሰን ማንኛውም ነገር ሲያጋጥመን ወዲያው ከመወሰን ይልቅ ሰከን ብሎ ማየትን ነው። ለምሳሌ ከሰው ጋር አለመግባባት ሲፈጠር ወዲያው ከመልስ ይልቅ ትንሽ አርፈን ብናስብበት ነገሩ በቀላሉ ይፈታል። 🌿\n\nእርስዎስ በእርጋታ ማሰብ የረዳዎት አጋጣሚ አለ? ፖስቱን ከተመቻችሁ ሴቭ ያድርጉት፤ ለወዳጅዎም ሼር በማድረግ ያካፍሉ። 💭"
   },
   {
     "line1": "ስራህን በፍቅር ስትሰራ",
@@ -412,7 +418,10 @@
     "author": "ኻሊል ጂብራን",
     "source": "owner",
     "id": "q037",
-    "template": "poster"
+    "template": "poster",
+    "image_prompt": "Occupying the upper and middle sections of a tall vertical illustration, an anonymous, stylized artisan works tenderly over their craft, radiating a warm golden light that transforms the dusty particles of their exhaustion into floating, luminous blossoms of pure joy.",
+    "image": "generated/q037.png",
+    "post_caption": "አንዳንድ ቀን ስራችን በጣም ሰልችቶን አሊያም ከብዶን ያውቃል? ነገር ግን የምንሰራውን ነገር ከልብ ስንወደው ድካሙ እንኳን ደስ ይላል። 😊\n\nበዛሬው ፖስታችን ላይ እንደምናየው ስራን በክፍያ ብቻ ሳይሆን በፍቅርና በቅንነት መስራት ትልቅ እረፍት ይሰጠናል። ለምሳሌ ለቤተሰባችን ምግብ ስንሰራ ወይም የምንወደውን ሙያ ስንተገብር ምንም ያህል ብንደክም ውስጣችን በደስታ ይሞላል። ☕\n\nይህ ፖስት ከተመቻችሁ ለወዳጅ ዘመድዎ ሼር በማድረግ ያካፍሉ፤ ለበኋላም ሴቭ አድርገው ያስቀምጡት። ❤️"
   },
   {
     "line1": "ከመናገርህ በፊት",
@@ -421,6 +430,7 @@
     "author": "ኮንፊሽየስ",
     "source": "owner",
     "id": "q038",
-    "template": "minimal"
+    "template": "minimal",
+    "post_caption": "አንዳንዴ በችኮላ የተናገርነው ቃል በኋላ ላይ ትልቅ ፀፀት ይዞብን የመጣበት ጊዜ አለ? አብዛኞቻችን ጋር ይሄ ነገር ደርሶ ያውቃል። 💭\n\nቃላቶቻችንን ከመናገራችን በፊት በልባችን ስንመዝናቸው የሰውን ስሜት ከመጎዳት እናድናለን። ለምሳሌ በንዴት ጊዜ እንኳን ትንሽ ታግሰን ካሰብንበት አላስፈላጊ ንግግርን ማስቀረት እንችላለን። በዚህ መልኩ ንግግራችን የቁስል ሳይሆን የመልካምነት ምንጭ ይሆናል። ❤️\n\nይህ ፖስት ከተመቻችሁ ለኋላ እንዲሆናችሁ ሴቭ አድርጉት ወይም ለወዳጆቻችሁ ሼር አድርጉት። እናንተስ በዚህ ሀሳብ ላይ ምን ታስባላችሁ፣ በኮመንት አጋሩን። 🙏"
   }
 ]
